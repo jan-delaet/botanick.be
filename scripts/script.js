@@ -6,8 +6,9 @@ i18next
     .init({
         fallbackLng: 'nl',
         supportedLngs: ['nl', 'en', 'fr'],
+        load: 'languageOnly',
         nonExplicitSupportedLngs: true,
-        backend: { loadPath: 'botanick.be/locales/{{lng}}.json' },
+        backend: { loadPath: './locales/{{lng}}.json' },
         detection: {
             order: ['localStorage', 'navigator'],
             lookupLocalStorage: 'botanick-lang',
