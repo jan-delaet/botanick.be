@@ -1,59 +1,37 @@
 
-// ═══════════════════════════════════════════════════════
-// i18next INITIALISATION
-// ═══════════════════════════════════════════════════════
+// i18next init
 i18next
-    .use(i18nextHttpBackend)          // loads /locales/{lng}.json
-    .use(i18nextBrowserLanguageDetector) // reads browser language
+    .use(i18nextHttpBackend)
+    .use(i18nextBrowserLanguageDetector)
     .init({
-        fallbackLng: 'nl',             // default to Dutch if unrecognised
+        fallbackLng: 'nl',
         supportedLngs: ['nl', 'en', 'fr'],
-        nonExplicitSupportedLngs: true, // 'nl-BE' → 'nl', 'fr-BE' → 'fr'
-        backend: {
-            loadPath: '/locales/{{lng}}.json'
-        },
+        nonExplicitSupportedLngs: true,
+        backend: { loadPath: '/locales/{{lng}}.json' },
         detection: {
-            // Check localStorage first (manual override), then browser language
             order: ['localStorage', 'navigator'],
             lookupLocalStorage: 'botanick-lang',
             caches: ['localStorage']
         }
-    }, onI18nReady);
-
-// ═══════════════════════════════════════════════════════
-// RENDER — called once on load and on every language change
-// ═══════════════════════════════════════════════════════
-function onI18nReady() {
-    renderAll();
-    document.body.classList.remove('i18n-loading');
-}
+    }, function () { renderAll(); document.body.classList.remove('i18n-loading'); });
 
 function renderAll() {
     const lng = i18next.language;
-
-    // Update <html lang> and <title>
     document.documentElement.lang = lng;
     document.title = i18next.t('page.title');
 
-    // Update switcher button states
+    // Sync all lang buttons (nav + drawer)
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === lng);
     });
 
-    // Translate every data-i18n element
-    // Supports modifiers: [html], [placeholder], bare (textContent)
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const raw = el.getAttribute('data-i18n');
-
-        // Parse out multiple bindings separated by ';'
-        // e.g. data-i18n="[placeholder]form.namePh" or "[html]hero.title"
-        const bindings = raw.split(';').map(s => s.trim());
-        bindings.forEach(binding => {
-            const match = binding.match(/^\[(\w+)\](.+)$/) || [null, 'text', binding];
-            const modifier = match[1];
-            const key = match[2];
+        raw.split(';').map(s => s.trim()).forEach(binding => {
+            const m = binding.match(/^\[(\w+)\](.+)$/);
+            const modifier = m ? m[1] : 'text';
+            const key = m ? m[2] : binding;
             const value = i18next.t(key);
-
             if (modifier === 'html') el.innerHTML = value;
             else if (modifier === 'placeholder') el.placeholder = value;
             else el.textContent = value;
@@ -61,34 +39,26 @@ function renderAll() {
     });
 }
 
-// ═══════════════════════════════════════════════════════
-// LANGUAGE SWITCHER
-// ═══════════════════════════════════════════════════════
+// Language buttons — all of them (nav + drawer share same handler)
 document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         i18next.changeLanguage(btn.dataset.lang, renderAll);
     });
 });
 
-// ═══════════════════════════════════════════════════════
-// NAV SCROLL
-// ═══════════════════════════════════════════════════════
+// Nav scroll
 const mainNav = document.getElementById('main-nav');
 window.addEventListener('scroll', () => {
     mainNav.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// ═══════════════════════════════════════════════════════
-// FADE-UP ON SCROLL
-// ═══════════════════════════════════════════════════════
+// Fade-up on scroll
 const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
+}, { threshold: 0.1 });
 document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-// ═══════════════════════════════════════════════════════
-// OCCASION TABS
-// ═══════════════════════════════════════════════════════
+// Occasion tabs
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -98,9 +68,29 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     });
 });
 
-// ═══════════════════════════════════════════════════════
-// INSTAGRAM MOCK GRID
-// ═══════════════════════════════════════════════════════
+// Hamburger / drawer
+const hamburgerBtn = document.getElementById('hamburger');
+const drawer = document.getElementById('mobile-drawer');
+
+hamburgerBtn.addEventListener('click', () => {
+    const isOpen = drawer.classList.toggle('open');
+    hamburgerBtn.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+    drawer.setAttribute('aria-hidden', String(!isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+function closeDrawer() {
+    drawer.classList.remove('open');
+    hamburgerBtn.classList.remove('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+// Instagram mock grid
 function buildMockGrid() {
     const grid = document.getElementById('ig-grid');
     grid.innerHTML = '';
@@ -115,12 +105,12 @@ function buildMockGrid() {
               <circle cx="17" cy="7" r="1.2" fill="#7a8c6a" stroke="none"/>
             </svg>
           </div>
-          <div class="insta-overlay">↗</div>`;
+          <div class="insta-overlay">&#8599;</div>`;
         grid.appendChild(post);
     }
 }
 
-// LIVE FEED — uncomment when your serverless proxy is ready:
+// LIVE FEED — uncomment when proxy is ready:
 /*
 async function loadInstagramFeed() {
   const grid = document.getElementById('ig-grid');
@@ -133,7 +123,7 @@ async function loadInstagramFeed() {
       a.className = 'insta-post';
       a.href = post.permalink; a.target = '_blank'; a.rel = 'noopener';
       a.innerHTML = `<img src="${img}" style="width:100%;height:100%;object-fit:cover" loading="lazy"/>
-                     <div class="insta-overlay">↗</div>`;
+                     <div class="insta-overlay">&#8599;</div>`;
       grid.appendChild(a);
     });
   } catch (e) { buildMockGrid(); }
@@ -142,9 +132,7 @@ loadInstagramFeed();
 */
 buildMockGrid();
 
-// ═══════════════════════════════════════════════════════
-// CONTACT FORM
-// ═══════════════════════════════════════════════════════
+// Contact form
 function handleFormSubmit(e) {
     e.preventDefault();
     alert(i18next.t('form.successMsg'));

@@ -5,6 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Botanick — Bloemenontwerp</title>
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="icon" href="/favicon-192.png" sizes="192x192" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,7 +18,6 @@
     <link rel="stylesheet" href="css/style.css">
 
     <link rel="icon" href="images/favicon.svg" sizes="any" type="image/svg+xml">
-
 </head>
 
 <body class="i18n-loading">
@@ -34,8 +38,25 @@
                 <button class="lang-btn" data-lang="en">EN</button>
                 <button class="lang-btn" data-lang="fr">FR</button>
             </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
+
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+        <a href="#about" data-i18n="nav.about" onclick="closeDrawer()"></a>
+        <a href="#portfolio" data-i18n="nav.portfolio" onclick="closeDrawer()"></a>
+        <a href="#occasions" data-i18n="nav.occasions" onclick="closeDrawer()"></a>
+        <a href="#instagram" data-i18n="nav.instagram" onclick="closeDrawer()"></a>
+        <a href="#contact" data-i18n="nav.contact" class="mobile-cta" onclick="closeDrawer()"></a>
+        <div class="lang-switcher" role="group" aria-label="Language">
+            <button class="lang-btn" data-lang="nl">NL</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="fr">FR</button>
+        </div>
+    </div>
 
     <!-- HERO -->
     <section id="hero">
@@ -43,7 +64,7 @@
             <p class="hero-eyebrow" data-i18n="hero.eyebrow"></p>
             <h1 class="hero-title" data-i18n="[html]hero.title"></h1>
             <p class="hero-sub" data-i18n="hero.sub"></p>
-            <div>
+            <div class="hero-buttons">
                 <a href="#portfolio" class="btn-primary" data-i18n="hero.cta1"></a>
                 <a href="#contact" class="btn-outline" data-i18n="hero.cta2"></a>
             </div>
@@ -91,7 +112,7 @@
                 <span class="section-label" data-i18n="portfolio.label"></span>
                 <h2 class="section-title" data-i18n="portfolio.title"></h2>
             </div>
-            <a href="#contact" class="btn-outline" style="margin-bottom:0.5rem" data-i18n="portfolio.enquire"></a>
+            <a href="#contact" class="btn-outline" data-i18n="portfolio.enquire"></a>
         </div>
         <div class="services-grid">
             <div class="service-card card-wedding fade-up">
@@ -152,7 +173,6 @@
             <button class="tab-btn" data-tab="corporate" data-i18n="occasions.corporate"></button>
             <button class="tab-btn" data-tab="funerals" data-i18n="occasions.funerals"></button>
         </div>
-
         <div class="tab-panel active" id="tab-weddings">
             <div class="tab-img weddings"><span class="tab-img-placeholder" data-i18n="hero.imgHint"></span></div>
             <div class="tab-text">
@@ -205,33 +225,32 @@
         <div class="instagram-header">
             <span class="section-label" data-i18n="instagram.label"></span>
             <h2 class="section-title" data-i18n="instagram.title"></h2>
-            <a href="https://instagram.com/botanick_be" target="_blank" rel="noopener" class="instagram-handle">
+            <a href="https://instagram.com/botanick" target="_blank" rel="noopener" class="instagram-handle">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <rect x="2" y="2" width="20" height="20" rx="5" />
                     <circle cx="12" cy="12" r="4" />
                     <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
                 </svg>
-                @botanick_be
+                @botanick
             </a>
         </div>
         <!--
-      INSTAGRAM INTEGRATIE — VEILIG KOPPELEN ZONDER API-SLEUTEL IN DE CODE
-      ─────────────────────────────────────────────────────────────────────
-      OPTIE 1 (aanbevolen) — gratis serverless proxy via Vercel of Netlify:
-      1. Maak een Facebook Developer App en haal een Instagram Basic Display API-token op.
-      2. Sla dit op als omgevingsvariabele (bijv. INSTAGRAM_TOKEN). Zet dit NOOIT in deze HTML.
-      3. Maak een serverless functie /api/instagram.js:
-           export default async function handler(req, res) {
-             const token = process.env.INSTAGRAM_TOKEN;
-             const url = `https://graph.instagram.com/me/media?fields=id,media_type,media_url,permalink,thumbnail_url&access_token=${token}`;
-             const data = await fetch(url).then(r => r.json());
-             res.json(data);
-           }
-      4. Uncomment het "Live feed" blok in de JS hieronder.
-      OPTIE 2 — SnapWidget (geen code, gratis tier): https://snapwidget.com
+      INSTAGRAM INTEGRATION
+      ─────────────────────
+      Option 1 (recommended) — serverless proxy on Vercel/Netlify:
+        1. Get an Instagram Basic Display API token
+        2. Store as env var INSTAGRAM_TOKEN (never in this file)
+        3. Create /api/instagram.js:
+             export default async function handler(req, res) {
+               const url = `https://graph.instagram.com/me/media?fields=id,media_type,media_url,permalink,thumbnail_url&access_token=${process.env.INSTAGRAM_TOKEN}`;
+               res.json(await fetch(url).then(r => r.json()));
+             }
+        4. Uncomment the loadInstagramFeed() call below
+
+      Option 2 — SnapWidget free embed: https://snapwidget.com
     -->
         <div class="instagram-grid" id="ig-grid"></div>
-        <p class="insta-note" data-i18n="[html]instagram.note"></p>
+        <!-- <p class="insta-note" data-i18n="[html]instagram.note"></p> -->
     </section>
 
     <!-- CONTACT -->
@@ -242,9 +261,9 @@
             <div class="divider"></div>
             <p class="section-body" data-i18n="contact.body"></p>
             <div class="contact-details">
-                <p><strong data-i18n="contact.emailLabel"></strong><br>contact@botanick.be</p>
-                <p><strong>Instagram</strong><br>@botanick_be</p>
-                <p><strong data-i18n="contact.basedLabel"></strong><br>België</p>
+                <p><strong data-i18n="contact.emailLabel"></strong><br>hello@botanick.be</p>
+                <p><strong>Instagram</strong><br>@botanick</p>
+                <p><strong data-i18n="contact.basedLabel"></strong><br>Belgium</p>
             </div>
         </div>
         <div class="contact-form">
@@ -289,13 +308,12 @@
         <span style="opacity:0.45" data-i18n="footer.copy"></span>
     </footer>
 
-    <!-- i18next + language detector from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/23.11.5/i18next.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/2.5.2/i18nextHttpBackend.min.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/8.0.0/i18nextBrowserLanguageDetector.min.js"></script>
-    <script src="scripts/script.js"></script>
 
+    <script src="scripts/script.js"></script>
 </body>
 
 </html>

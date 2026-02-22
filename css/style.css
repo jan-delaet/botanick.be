@@ -46,7 +46,7 @@ h4 {
     font-weight: 300;
 }
 
-/* ─── NAV ─── */
+/* NAV */
 nav {
     position: fixed;
     top: 0;
@@ -57,10 +57,10 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 1.4rem 4rem;
-    background: rgba(245, 240, 232, 0.85);
+    background: rgba(245, 240, 232, 0.88);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(122, 140, 106, 0.15);
-    transition: padding 0.3s;
+    transition: padding 0.3s, background 0.3s;
 }
 
 nav.scrolled {
@@ -75,6 +75,7 @@ nav.scrolled {
     letter-spacing: 0.15em;
     color: var(--moss);
     text-decoration: none;
+    flex-shrink: 0;
 }
 
 .nav-logo span {
@@ -136,14 +137,14 @@ nav.scrolled {
 
 .nav-cta:hover {
     background: var(--sage) !important;
-    color: var(--white) !important;
 }
 
-/* ─── LANGUAGE SWITCHER ─── */
+/* LANGUAGE SWITCHER */
 .lang-switcher {
     display: flex;
     border: 1px solid rgba(122, 140, 106, 0.3);
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .lang-btn {
@@ -180,7 +181,94 @@ nav.scrolled {
     color: var(--moss);
 }
 
-/* ─── HERO ─── */
+/* HAMBURGER */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    flex-shrink: 0;
+    z-index: 200;
+}
+
+.hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--moss);
+    transition: transform 0.3s, opacity 0.2s;
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* MOBILE DRAWER */
+.mobile-drawer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--cream);
+    z-index: 99;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.mobile-drawer.open {
+    display: flex;
+}
+
+.mobile-drawer a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    color: var(--moss);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+    text-align: center;
+}
+
+.mobile-drawer a:hover {
+    color: var(--bark);
+}
+
+.mobile-drawer .mobile-cta {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: var(--moss);
+    color: var(--cream) !important;
+    padding: 0.9rem 2.8rem;
+    margin-top: 0.5rem;
+}
+
+.mobile-drawer .lang-switcher {
+    margin-top: 1.5rem;
+    border-color: rgba(122, 140, 106, 0.4);
+}
+
+.mobile-drawer .lang-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.72rem;
+}
+
+/* HERO */
 #hero {
     min-height: 100vh;
     display: grid;
@@ -223,6 +311,12 @@ nav.scrolled {
     margin-bottom: 3rem;
 }
 
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
 .btn-primary {
     display: inline-block;
     background: var(--moss);
@@ -234,7 +328,6 @@ nav.scrolled {
     letter-spacing: 0.15em;
     text-transform: uppercase;
     transition: background 0.3s, transform 0.2s;
-    align-self: flex-start;
 }
 
 .btn-primary:hover {
@@ -253,7 +346,6 @@ nav.scrolled {
     letter-spacing: 0.15em;
     text-transform: uppercase;
     transition: background 0.3s, color 0.3s;
-    margin-left: 1rem;
 }
 
 .btn-outline:hover {
@@ -286,7 +378,7 @@ nav.scrolled {
     opacity: 0.6;
 }
 
-/* ─── SHARED ─── */
+/* SHARED */
 section {
     padding: 6rem 6rem;
     position: relative;
@@ -322,7 +414,7 @@ section {
     margin: 2rem 0;
 }
 
-/* ─── ABOUT ─── */
+/* ABOUT */
 #about {
     background: var(--white);
     display: grid;
@@ -378,7 +470,7 @@ section {
     margin: 2rem 0;
 }
 
-/* ─── PORTFOLIO ─── */
+/* PORTFOLIO */
 #portfolio {
     background: var(--cream);
 }
@@ -478,7 +570,7 @@ section {
     margin-bottom: 0.6rem;
 }
 
-/* ─── OCCASIONS ─── */
+/* OCCASIONS */
 #occasions {
     background: var(--linen);
 }
@@ -507,6 +599,7 @@ section {
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
     transition: all 0.2s;
+    white-space: nowrap;
 }
 
 .tab-btn.active {
@@ -575,7 +668,7 @@ section {
     background: linear-gradient(135deg, #b8bec4, #d0d5dc);
 }
 
-/* ─── INSTAGRAM ─── */
+/* INSTAGRAM */
 #instagram {
     background: var(--white);
     text-align: center;
@@ -709,7 +802,7 @@ section {
     line-height: 1.7;
 }
 
-/* ─── CONTACT ─── */
+/* CONTACT */
 #contact {
     background: var(--moss);
     color: var(--cream);
@@ -824,7 +917,7 @@ section {
     background: var(--mist);
 }
 
-/* ─── FOOTER ─── */
+/* FOOTER */
 footer {
     background: var(--earth);
     color: var(--mist);
@@ -861,7 +954,7 @@ footer {
     opacity: 1;
 }
 
-/* ─── ANIMATIONS ─── */
+/* ANIMATIONS */
 .fade-up {
     opacity: 0;
     transform: translateY(28px);
@@ -889,27 +982,78 @@ footer {
     transition-delay: 0.4s;
 }
 
-/* ─── LOADING STATE ─── */
+/* LOADING */
 body.i18n-loading {
     visibility: hidden;
 }
 
-/* ─── MOBILE ─── */
-@media (max-width: 900px) {
+/* TABLET 1100px */
+@media (max-width: 1100px) {
     nav {
-        padding: 1.2rem 2rem;
+        padding: 1.2rem 2.5rem;
+    }
+
+    nav.scrolled {
+        padding: 1rem 2.5rem;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        font-size: 0.72rem;
+    }
+
+    section {
+        padding: 5rem 3rem;
+    }
+
+    #about {
+        padding: 5rem 3rem;
+        gap: 3rem;
+    }
+
+    footer {
+        padding: 2rem 3rem;
+    }
+}
+
+/* MOBILE 768px */
+@media (max-width: 768px) {
+
+    /* Nav */
+    nav {
+        padding: 1rem 1.5rem;
+    }
+
+    nav.scrolled {
+        padding: 0.85rem 1.5rem;
     }
 
     .nav-links {
         display: none;
     }
 
-    section {
-        padding: 4rem 2rem;
+    .nav-right>.lang-switcher {
+        display: none;
     }
 
+    /* moves into drawer */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Sections */
+    section {
+        padding: 3.5rem 1.5rem;
+    }
+
+    /* Hero */
     #hero {
         grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 64px;
     }
 
     .hero-visual {
@@ -917,47 +1061,131 @@ body.i18n-loading {
     }
 
     .hero-text {
-        padding: 4rem 2rem;
+        padding: 3rem 1.5rem 3.5rem;
     }
 
+    .hero-title {
+        font-size: clamp(2.8rem, 11vw, 4rem);
+    }
+
+    .hero-sub {
+        max-width: 100%;
+    }
+
+    /* About */
     #about {
         grid-template-columns: 1fr;
-        padding: 4rem 2rem;
+        padding: 3.5rem 1.5rem;
+        gap: 2rem;
+    }
+
+    .about-img-box {
+        aspect-ratio: 4/3;
+    }
+
+    .about-accent-box {
+        display: none;
     }
 
     .about-text {
         padding-left: 0;
     }
 
+    .about-quote {
+        font-size: 1.3rem;
+    }
+
+    /* Portfolio */
+    .portfolio-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
     .services-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .service-card:first-child {
         grid-column: span 1;
     }
 
+    .service-card:first-child .service-img {
+        aspect-ratio: 16/9;
+    }
+
+    /* Occasions — scrollable tab bar */
+    .occasions-tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
+    }
+
+    .occasions-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-btn {
+        padding: 0.8rem 1rem;
+        flex-shrink: 0;
+        font-size: 0.68rem;
+    }
+
     .tab-panel.active {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .tab-img {
         display: none;
     }
 
+    /* Instagram */
     .instagram-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
     }
 
+    /* Contact */
     #contact {
         grid-template-columns: 1fr;
-        padding: 4rem 2rem;
+        padding: 3.5rem 1.5rem;
+        gap: 2.5rem;
     }
 
+    .contact-form {
+        padding: 1.5rem;
+    }
+
+    /* Footer */
     footer {
         flex-direction: column;
+        align-items: center;
         gap: 1.5rem;
         text-align: center;
-        padding: 2rem;
+        padding: 2rem 1.5rem;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem 1.5rem;
+    }
+}
+
+/* SMALL PHONES 390px */
+@media (max-width: 390px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .section-title {
+        font-size: 1.9rem;
+    }
+
+    .instagram-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
