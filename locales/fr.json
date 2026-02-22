@@ -1,0 +1,124 @@
+{
+    "page": {
+        "title": "Botanick — Création Florale"
+    },
+    "nav": {
+        "about": "À propos",
+        "portfolio": "Portfolio",
+        "occasions": "Occasions",
+        "instagram": "Instagram",
+        "contact": "Nous contacter",
+        "contact2": "Contact"
+    },
+    "hero": {
+        "eyebrow": "Création florale artisanale · Belgique",
+        "title": "Là où la <em>nature</em><br>raconte une histoire",
+        "sub": "Botanick crée des compositions florales sur mesure, ancrées dans la beauté du monde naturel — pour les mariages, les célébrations et chaque instant précieux.",
+        "cta1": "Découvrir le travail",
+        "cta2": "Prendre rendez-vous",
+        "imgHint": "Votre photo ici"
+    },
+    "about": {
+        "label": "À propos de Botanick",
+        "title": "Les fleurs comme<br><em>langage</em>",
+        "imgCaption": "Votre portrait ici",
+        "body1": "Chaque tige, chaque feuille et chaque pétale a quelque chose à dire. Chez Botanick, nous croyons que les arrangements les plus significatifs sont ceux qui semblent vivants — portant le parfum de la rosée du matin et la poésie silencieuse de la nature.",
+        "quote": "\"Je n'arrange pas les fleurs — je compose des instants.\"",
+        "body2": "Basée en Belgique, Botanick travaille avec des fleurs locales et de saison autant que possible, créant des designs à la fois beaux et respectueux de notre terre. De bouquets intimes aux installations événementielles complètes, chaque pièce est réalisée avec intention."
+    },
+    "portfolio": {
+        "label": "Portfolio",
+        "title": "Travaux sélectionnés",
+        "enquire": "Demande",
+        "wedding": {
+            "title": "Mariage & Cérémonie",
+            "desc": "Bouquets sur mesure, arches de cérémonie, centres de table et stylisme floral complet pour votre plus beau jour."
+        },
+        "seasonal": {
+            "title": "Arrangements saisonniers",
+            "desc": "Des compositions fraîches qui célèbrent ce qui fleurit en ce moment — honnêtes, locales et vivantes."
+        },
+        "xmas": {
+            "title": "Noël & Hiver",
+            "desc": "Couronnes, guirlandes, centres de table et installations festives qui réchauffent la saison."
+        },
+        "corp": {
+            "title": "Événements d'entreprise",
+            "desc": "Design floral élégant aligné sur votre marque pour les lancements, conférences et bureaux."
+        },
+        "funeral": {
+            "title": "Deuil & Condoléances",
+            "desc": "Des hommages attentionnés réalisés avec soin — dessus de cercueil, compositions debout et bouquets de souvenir."
+        }
+    },
+    "occasions": {
+        "label": "Occasions",
+        "title": "Chaque moment<br>mérite des fleurs",
+        "sub": "Chaque occasion appelle quelque chose de différent. Découvrez les spécialités de Botanick ci-dessous.",
+        "weddings": "Mariages",
+        "seasonal": "Saison",
+        "christmas": "Noël",
+        "corporate": "Entreprise",
+        "funerals": "Deuil"
+    },
+    "tabs": {
+        "weddings": {
+            "title": "Mariages & Bouquets de mariée",
+            "p1": "Vos fleurs de mariage doivent sembler être le prolongement de vous-même. Botanick collabore étroitement avec les couples, de la première consultation jusqu'au grand jour.",
+            "p2": "Nous proposons des forfaits de stylisme nuptial complets ainsi que des pièces individuelles pour les cérémonies intimes.",
+            "cta": "Commencer votre histoire"
+        },
+        "seasonal": {
+            "title": "Arrangements saisonniers",
+            "p1": "La nature définit la palette. Botanick crée des bouquets saisonniers avec ce qui est au meilleur de sa forme — tulipes au printemps, dahlias en fin d'été, feuillage et baies en automne.",
+            "p2": "Commandez un abonnement saisonnier récurrent ou un arrangement unique pour chez vous ou un être cher.",
+            "cta": "Commander des fleurs"
+        },
+        "christmas": {
+            "title": "Noël & Hiver",
+            "p1": "L'hiver est la saison la plus atmosphérique pour la création florale. Pensez aux oranges séchées, au sapin, à l'eucalyptus, à l'amaryllis et aux bougies.",
+            "p2": "Les commandes ouvrent chaque novembre — contactez-nous tôt pour réserver votre créneau.",
+            "cta": "Réserver votre couronne"
+        },
+        "corporate": {
+            "title": "Événements d'entreprise",
+            "p1": "Les premières impressions comptent. Botanick propose un design floral réfléchi pour les lancements de produits, réceptions de bureau et conférences — toujours dans l'esprit de votre marque, toujours livré à temps.",
+            "p2": "Abonnements mensuels pour bureau et forfaits événementiels ponctuels disponibles.",
+            "cta": "Demander un devis"
+        },
+        "funerals": {
+            "title": "Deuil & Condoléances",
+            "p1": "Dire au revoir mérite le même soin et la même beauté que n'importe quel autre moment. Botanick crée des hommages personnels — dessus de cercueil, couronnes debout et bouquets de souvenir.",
+            "p2": "Veuillez nous contacter directement pour une aide compatissante et rapide.",
+            "cta": "Nous contacter"
+        }
+    },
+    "instagram": {
+        "label": "Dernières publications Instagram",
+        "title": "Suivez-nous",
+        "note": "<em>Prêt à connecter votre flux en direct ?</em> Consultez les commentaires HTML dans la section Instagram pour un guide étape par étape permettant d'intégrer vos publications de manière sécurisée — aucune clé API exposée dans le navigateur."
+    },
+    "contact": {
+        "label": "Contact",
+        "title": "Créons quelque<br>chose de<br><em>beau</em>",
+        "body": "Que vous ayez un projet en tête ou que vous commenciez à rêver, contactez-nous. Chaque projet commence par une conversation.",
+        "emailLabel": "E-mail",
+        "basedLabel": "Basé en"
+    },
+    "form": {
+        "name": "Votre nom",
+        "namePh": "Nom",
+        "email": "Adresse e-mail",
+        "emailPh": "bonjour@exemple.be",
+        "occasion": "Occasion",
+        "occasionPh": "Choisir une occasion…",
+        "other": "Autre",
+        "message": "Message",
+        "messagePh": "Parlez-moi de votre vision…",
+        "submit": "Envoyer le message",
+        "successMsg": "Merci ! Votre message a été envoyé. Botanick vous contactera bientôt."
+    },
+    "footer": {
+        "copy": "© 2025 Botanick. Tous droits réservés."
+    }
+}

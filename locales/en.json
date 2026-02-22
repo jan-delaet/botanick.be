@@ -1,0 +1,124 @@
+{
+    "page": {
+        "title": "Botanick — Floral Design"
+    },
+    "nav": {
+        "about": "About",
+        "portfolio": "Portfolio",
+        "occasions": "Occasions",
+        "instagram": "Instagram",
+        "contact": "Get in touch",
+        "contact2": "Contact"
+    },
+    "hero": {
+        "eyebrow": "Handcrafted Floral Design · Belgium",
+        "title": "Where <em>nature</em><br>tells a story",
+        "sub": "Botanick creates bespoke floral arrangements rooted in the beauty of the natural world — for weddings, celebrations, and every quiet moment in between.",
+        "cta1": "Explore work",
+        "cta2": "Book a consultation",
+        "imgHint": "Your hero photo here"
+    },
+    "about": {
+        "label": "About Botanick",
+        "title": "Flowers as a<br><em>language</em>",
+        "imgCaption": "Your portrait here",
+        "body1": "Every stem, leaf, and petal has something to say. At Botanick, we believe that the most meaningful arrangements are the ones that feel alive — that carry the scent of morning dew and the quiet poetry of the natural world.",
+        "quote": "\"I don't just arrange flowers — I compose moments.\"",
+        "body2": "Based in Belgium, Botanick works with locally sourced and seasonal blooms wherever possible, creating designs that are both beautiful and mindful of our earth. From intimate bouquets to full event installations, every piece is made with intention."
+    },
+    "portfolio": {
+        "label": "Portfolio",
+        "title": "Selected work",
+        "enquire": "Enquire",
+        "wedding": {
+            "title": "Bridal & Ceremony",
+            "desc": "Bespoke bouquets, ceremony arches, table centrepieces, and full floral styling for your most important day."
+        },
+        "seasonal": {
+            "title": "Seasonal Arrangements",
+            "desc": "Fresh compositions that celebrate what's blooming right now — honest, local, and alive."
+        },
+        "xmas": {
+            "title": "Christmas & Winter",
+            "desc": "Wreaths, garlands, centrepieces, and festive installations that bring warmth to the season."
+        },
+        "corp": {
+            "title": "Corporate Events",
+            "desc": "Elegant, brand-aligned floral design for launches, conferences, and office environments."
+        },
+        "funeral": {
+            "title": "Tribute & Sympathy",
+            "desc": "Thoughtful tributes crafted with care — coffin sprays, standing tributes, and heartfelt posies."
+        }
+    },
+    "occasions": {
+        "label": "Occasions",
+        "title": "Every moment<br>deserves flowers",
+        "sub": "Each occasion calls for something different. Explore Botanick's specialisms below.",
+        "weddings": "Weddings",
+        "seasonal": "Seasonal",
+        "christmas": "Christmas",
+        "corporate": "Corporate",
+        "funerals": "Sympathy"
+    },
+    "tabs": {
+        "weddings": {
+            "title": "Weddings & Bridal",
+            "p1": "Your wedding flowers should feel like an extension of you. Botanick works closely with couples from the initial consultation through to your wedding day.",
+            "p2": "We offer full-day bridal styling packages as well as individual pieces for intimate ceremonies.",
+            "cta": "Begin your story"
+        },
+        "seasonal": {
+            "title": "Seasonal Arrangements",
+            "p1": "Nature sets the palette. Botanick creates seasonal bouquets using whatever is at its very best right now — tulips in spring, dahlias in late summer, foliage and berries in autumn.",
+            "p2": "Order a recurring seasonal subscription or a one-off arrangement for your home or loved one.",
+            "cta": "Order flowers"
+        },
+        "christmas": {
+            "title": "Christmas & Winter",
+            "p1": "Winter is the most atmospheric season for floral design. Think dried oranges, pine, eucalyptus, amaryllis, and candlelight.",
+            "p2": "Orders open each November — get in touch early to secure your slot.",
+            "cta": "Reserve your wreath"
+        },
+        "corporate": {
+            "title": "Corporate Events",
+            "p1": "First impressions matter. Botanick provides thoughtful floral design for product launches, office receptions, conferences, and corporate gifting — always on brand, always on time.",
+            "p2": "Monthly office subscriptions and one-off event packages are available.",
+            "cta": "Request a quote"
+        },
+        "funerals": {
+            "title": "Funerals & Sympathy",
+            "p1": "Saying goodbye deserves the same care and beauty as any other moment. Botanick creates sensitive, personal tributes — coffin sprays, standing wreaths, and memory bouquets.",
+            "p2": "Please reach out directly for compassionate and prompt assistance.",
+            "cta": "Get in touch"
+        }
+    },
+    "instagram": {
+        "label": "Latest from Instagram",
+        "title": "Follow along",
+        "note": "<em>Ready to connect your live feed?</em> See the HTML comments in the Instagram section for a step-by-step guide to securely embedding your posts — no API keys exposed in the browser."
+    },
+    "contact": {
+        "label": "Contact",
+        "title": "Let's create<br>something<br><em>beautiful</em>",
+        "body": "Whether you have a brief in mind or are just beginning to dream, reach out. Every project starts with a conversation.",
+        "emailLabel": "Email",
+        "basedLabel": "Based in"
+    },
+    "form": {
+        "name": "Your name",
+        "namePh": "Name",
+        "email": "Email address",
+        "emailPh": "hello@example.com",
+        "occasion": "Occasion",
+        "occasionPh": "Select an occasion…",
+        "other": "Other",
+        "message": "Message",
+        "messagePh": "Tell me about your vision…",
+        "submit": "Send message",
+        "successMsg": "Thank you! Your message has been sent. Botanick will be in touch soon."
+    },
+    "footer": {
+        "copy": "© 2025 Botanick. All rights reserved."
+    }
+}

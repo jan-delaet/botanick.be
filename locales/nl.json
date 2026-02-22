@@ -1,0 +1,124 @@
+{
+    "page": {
+        "title": "Botanick — Bloemenontwerp"
+    },
+    "nav": {
+        "about": "Over ons",
+        "portfolio": "Portfolio",
+        "occasions": "Gelegenheden",
+        "instagram": "Instagram",
+        "contact": "Neem contact op",
+        "contact2": "Contact"
+    },
+    "hero": {
+        "eyebrow": "Handgemaakt Bloemenontwerp · België",
+        "title": "Waar <em>natuur</em><br>een verhaal vertelt",
+        "sub": "Botanick creëert op maat gemaakte bloemstukken geworteld in de schoonheid van de natuur — voor bruiloften, vieringen en elk stil moment daartussenin.",
+        "cta1": "Ontdek ons werk",
+        "cta2": "Afspraak maken",
+        "imgHint": "Jouw foto hier"
+    },
+    "about": {
+        "label": "Over Botanick",
+        "title": "Bloemen als<br><em>taal</em>",
+        "imgCaption": "Jouw portret hier",
+        "body1": "Elke stengel, elk blad en elke bloemblaadjes heeft iets te zeggen. Bij Botanick geloven we dat de meest betekenisvolle stukken diegene zijn die levend aanvoelen — die de geur dragen van ochtenddauw en de stille poëzie van de natuur.",
+        "quote": "\"Ik schik geen bloemen — ik componeer momenten.\"",
+        "body2": "Botanick werkt met lokaal geteelde en seizoensbloemen waar mogelijk, en creëert ontwerpen die zowel prachtig als respectvol zijn voor onze aarde. Van intieme boeketten tot volledige evenementinstallaties — elk stuk wordt met intentie gemaakt."
+    },
+    "portfolio": {
+        "label": "Portfolio",
+        "title": "Geselecteerd werk",
+        "enquire": "Vraag aan",
+        "wedding": {
+            "title": "Bruids- & Ceremoniebloemen",
+            "desc": "Op maat gemaakte boeketten, ceremoniebogen, tafelstukken en volledige bloemstyling voor jouw mooiste dag."
+        },
+        "seasonal": {
+            "title": "Seizoensarrangementen",
+            "desc": "Verse composities die vieren wat er nu bloeit — eerlijk, lokaal en vol leven."
+        },
+        "xmas": {
+            "title": "Kerst & Winter",
+            "desc": "Kransen, slingers, tafelstukken en feestelijke installaties die warmte brengen in het seizoen."
+        },
+        "corp": {
+            "title": "Zakelijke Evenementen",
+            "desc": "Elegant, merkgericht bloemenontwerp voor launches, conferenties en kantooromgevingen."
+        },
+        "funeral": {
+            "title": "Rouw & Condoleance",
+            "desc": "Doordachte bloemstukken met zorg gemaakt — kistbedekking, staande stukken en hartelijke bloemstukjes."
+        }
+    },
+    "occasions": {
+        "label": "Gelegenheden",
+        "title": "Elk moment<br>verdient bloemen",
+        "sub": "Elke gelegenheid vraagt om iets anders. Ontdek de specialiteiten van Botanick hieronder.",
+        "weddings": "Bruiloften",
+        "seasonal": "Seizoen",
+        "christmas": "Kerst",
+        "corporate": "Zakelijk",
+        "funerals": "Rouw"
+    },
+    "tabs": {
+        "weddings": {
+            "title": "Bruiloften & Bruidsbloemen",
+            "p1": "Jouw bruiloftsbloemen moeten aanvoelen als een verlengstuk van jou. Botanick werkt nauw samen met koppels — van het eerste gesprek tot de grote dag zelf.",
+            "p2": "We bieden volledige bruidstylingpakketten aan alsook losse stukken voor intieme ceremonies.",
+            "cta": "Begin jouw verhaal"
+        },
+        "seasonal": {
+            "title": "Seizoensarrangementen",
+            "p1": "De natuur bepaalt het palet. Botanick maakt seizoensboeketten met wat op dit moment op zijn allerbest is — tulpen in de lente, dahlia's in de nazomer, bladeren en bessen in de herfst.",
+            "p2": "Bestel een terugkerend seizoensabonnement of een eenmalig stuk voor thuis of een geliefde.",
+            "cta": "Bloemen bestellen"
+        },
+        "christmas": {
+            "title": "Kerst & Winter",
+            "p1": "Winter is het meest sfeervolle seizoen voor bloemenontwerp. Denk aan gedroogde sinaasappels, dennenboom, eucalyptus, amaryllis en kaarslicht.",
+            "p2": "Bestellingen openen elk november — neem vroeg contact op om jouw plek te reserveren.",
+            "cta": "Reserveer jouw krans"
+        },
+        "corporate": {
+            "title": "Zakelijke Evenementen",
+            "p1": "Eerste indrukken tellen. Botanick verzorgt doordacht bloemenontwerp voor productlanceringen, kantoorrecepties en conferenties — altijd on-brand, altijd op tijd.",
+            "p2": "Maandelijkse kantoorabonnementen en eenmalige evenementenpakketten beschikbaar.",
+            "cta": "Offerte aanvragen"
+        },
+        "funerals": {
+            "title": "Rouw & Condoleance",
+            "p1": "Afscheid nemen verdient dezelfde zorg en schoonheid als elk ander moment. Botanick maakt persoonlijke rouwtributen — kistbedekking, staande kransen en herinneringsboeketten.",
+            "p2": "Neem rechtstreeks contact op voor medelevende en snelle hulp.",
+            "cta": "Neem contact op"
+        }
+    },
+    "instagram": {
+        "label": "Laatste van Instagram",
+        "title": "Volg ons",
+        "note": "<em>Klaar om je live feed te koppelen?</em> Zie de HTML-opmerkingen in de Instagram-sectie voor een stapsgewijze handleiding — geen API-sleutels zichtbaar in de browser."
+    },
+    "contact": {
+        "label": "Contact",
+        "title": "Laat ons iets<br><em>moois</em><br>creëren",
+        "body": "Of je nu een idee hebt of nog aan het dromen bent — neem contact op. Elk project begint met een gesprek.",
+        "emailLabel": "E-mail",
+        "basedLabel": "Gevestigd in"
+    },
+    "form": {
+        "name": "Jouw naam",
+        "namePh": "Naam",
+        "email": "E-mailadres",
+        "emailPh": "hallo@voorbeeld.be",
+        "occasion": "Gelegenheid",
+        "occasionPh": "Kies een gelegenheid…",
+        "other": "Andere",
+        "message": "Bericht",
+        "messagePh": "Vertel me over jouw wensen…",
+        "submit": "Verstuur bericht",
+        "successMsg": "Bedankt! Jouw bericht is verzonden. Botanick neemt spoedig contact met je op."
+    },
+    "footer": {
+        "copy": "© 2025 Botanick. Alle rechten voorbehouden."
+    }
+}
