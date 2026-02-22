@@ -7,7 +7,7 @@ i18next
         fallbackLng: 'nl',
         supportedLngs: ['nl', 'en', 'fr'],
         nonExplicitSupportedLngs: true,
-        backend: { loadPath: '/locales/{{lng}}.json' },
+        backend: { loadPath: './locales/{{lng}}.json' },
         detection: {
             order: ['localStorage', 'navigator'],
             lookupLocalStorage: 'botanick-lang',
