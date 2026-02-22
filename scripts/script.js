@@ -5,7 +5,7 @@ i18next
     .use(i18nextBrowserLanguageDetector)
     .init({
         fallbackLng: 'nl', supportedLngs: ['nl', 'en', 'fr'], nonExplicitSupportedLngs: true,
-        backend: { loadPath: '/locales/{{lng}}.json' },
+        backend: { loadPath: './locales/{{lng}}.json' },
         detection: { order: ['localStorage', 'navigator'], lookupLocalStorage: 'botanick-lang', caches: ['localStorage'] }
     }, function () { renderAll(); document.body.classList.remove('i18n-loading'); });
 
