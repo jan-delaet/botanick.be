@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Botanick — Bloemenontwerp</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="icon" href="/favicon-192.png" sizes="192x192" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --moss: #3d4a2e;
+            --sage: #7a8c6a;
+            --cream: #f5f0e8;
+            --linen: #ece6d9;
+            --bark: #8c6f52;
+            --petal: #c9a98a;
+            --earth: #2a2018;
+            --mist: #b8c4a8;
+            --white: #faf8f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background: var(--cream);
+            color: var(--earth);
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.4;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.4rem 4rem;
+            background: rgba(245, 240, 232, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(122, 140, 106, 0.15);
+            transition: padding 0.3s, background 0.3s;
+        }
+
+        nav.scrolled {
+            padding: 1rem 4rem;
+            background: rgba(245, 240, 232, 0.97);
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            color: var(--moss);
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .nav-logo span {
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--earth);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--sage);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--moss);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--moss);
+            color: var(--cream) !important;
+            padding: 0.55rem 1.4rem;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--sage) !important;
+        }
+
+        /* ── LANG SWITCHER ── */
+        .lang-switcher {
+            display: flex;
+            border: 1px solid rgba(122, 140, 106, 0.3);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--sage);
+            padding: 0.38rem 0.7rem;
+            transition: background 0.2s, color 0.2s;
+            position: relative;
+        }
+
+        .lang-btn+.lang-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20%;
+            bottom: 20%;
+            width: 1px;
+            background: rgba(122, 140, 106, 0.3);
+        }
+
+        .lang-btn.active {
+            background: var(--moss);
+            color: var(--cream);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: var(--linen);
+            color: var(--moss);
+        }
+
+        /* ── HAMBURGER ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            flex-shrink: 0;
+            z-index: 200;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: var(--moss);
+            transition: transform 0.3s, opacity 0.2s;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
+
+        /* ── MOBILE DRAWER ── */
+        .mobile-drawer {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--cream);
+            z-index: 99;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .mobile-drawer.open {
+            display: flex;
+        }
+
+        .mobile-drawer a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--moss);
+            text-decoration: none;
+            letter-spacing: 0.06em;
+            transition: color 0.2s;
+            text-align: center;
+        }
+
+        .mobile-drawer a:hover {
+            color: var(--bark);
+        }
+
+        .mobile-drawer .mobile-cta {
+            font-family: 'Jost', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            background: var(--moss);
+            color: var(--cream) !important;
+            padding: 0.9rem 2.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .mobile-drawer .lang-switcher {
+            margin-top: 1.5rem;
+        }
+
+        .mobile-drawer .lang-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.72rem;
+        }
+
+        /* ── HERO ── */
+        #hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding-top: 80px;
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 6rem 4rem 6rem 6rem;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.72rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 5vw, 6rem);
+            line-height: 1.05;
+            color: var(--moss);
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--bark);
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--sage);
+            max-width: 38ch;
+            margin-bottom: 3rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--moss);
+            color: var(--cream);
+            text-decoration: none;
+            padding: 0.9rem 2.4rem;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--sage);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            border: 1px solid var(--moss);
+            color: var(--moss);
+            text-decoration: none;
+            padding: 0.85rem 2.2rem;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: var(--moss);
+            color: var(--cream);
+        }
+
+        .hero-visual {
+            position: relative;
+            overflow: hidden;
+            background: var(--linen);
+        }
+
+        .hero-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--linen) 0%, var(--mist) 50%, var(--linen) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .hero-img-hint {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--sage);
+            font-size: 1.1rem;
+            opacity: 0.6;
+        }
+
+        /* ── SHARED ── */
+        section {
+            padding: 6rem 6rem;
+            position: relative;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--petal);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(2.2rem, 3.5vw, 3.8rem);
+            color: var(--moss);
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+        }
+
+        .section-body {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--sage);
+            max-width: 55ch;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--mist);
+            margin: 2rem 0;
+        }
+
+        /* ── ABOUT ── */
+        #about {
+            background: var(--white);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            padding: 7rem 6rem;
+        }
+
+        .about-img-frame {
+            position: relative;
+        }
+
+        .about-img-box {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: linear-gradient(160deg, var(--mist), var(--linen));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-img-caption {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--sage);
+            font-size: 1rem;
+            opacity: 0.5;
+        }
+
+        .about-accent-box {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 60%;
+            height: 60%;
+            border: 1px solid var(--mist);
+            z-index: -1;
+        }
+
+        .about-text {
+            padding-left: 2rem;
+        }
+
+        .about-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--bark);
+            line-height: 1.5;
+            border-left: 2px solid var(--mist);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        /* ── PORTFOLIO ── */
+        #portfolio {
+            background: var(--cream);
+        }
+
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .service-card:first-child {
+            grid-column: span 2;
+        }
+
+        .service-img {
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .service-card:first-child .service-img {
+            aspect-ratio: 21/9;
+        }
+
+        .service-img-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--sage);
+            opacity: 0.5;
+            position: absolute;
+            transition: opacity 0.3s;
+        }
+
+        .card-wedding .service-img {
+            background: linear-gradient(135deg, #c5ceba, #dde3d4);
+        }
+
+        .card-seasonal .service-img {
+            background: linear-gradient(135deg, #cfc4a8, #e5dcc9);
+        }
+
+        .card-xmas .service-img {
+            background: linear-gradient(135deg, #b8c4a8, #d4dfc8);
+        }
+
+        .card-corp .service-img {
+            background: linear-gradient(135deg, #c4b8a8, #ddd4c5);
+        }
+
+        .card-funeral .service-img {
+            background: linear-gradient(135deg, #b8bec4, #d0d5dc);
+        }
+
+        .service-info {
+            padding: 1.5rem;
+            border-top: 1px solid var(--linen);
+        }
+
+        .service-info h3 {
+            font-size: 1.3rem;
+            color: var(--moss);
+            margin-bottom: 0.4rem;
+        }
+
+        .service-info p {
+            font-size: 0.85rem;
+            color: var(--sage);
+            line-height: 1.6;
+        }
+
+        .service-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--petal);
+            margin-bottom: 0.6rem;
+        }
+
+        /* ── CLICKABLE IMAGE OVERLAY ── */
+        .img-clickable {
+            cursor: zoom-in !important;
+        }
+
+        .img-clickable::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(61, 74, 46, 0);
+            transition: background 0.3s;
+            pointer-events: none;
+        }
+
+        .img-clickable:hover::after {
+            background: rgba(61, 74, 46, 0.25);
+        }
+
+        .img-zoom-icon {
+            position: absolute;
+            bottom: 0.8rem;
+            right: 0.8rem;
+            width: 32px;
+            height: 32px;
+            background: rgba(245, 240, 232, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.25s;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .img-zoom-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--moss);
+        }
+
+        .img-clickable:hover .img-zoom-icon {
+            opacity: 1;
+        }
+
+        /* ── OCCASIONS ── */
+        #occasions {
+            background: var(--linen);
+        }
+
+        .occasions-intro {
+            max-width: 50ch;
+            margin-bottom: 4rem;
+        }
+
+        .occasions-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--mist);
+            margin-bottom: 3rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--sage);
+            padding: 0.8rem 1.8rem;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            color: var(--moss);
+            border-bottom-color: var(--moss);
+        }
+
+        .tab-btn:hover {
+            color: var(--moss);
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .tab-img {
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-img-placeholder {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--sage);
+            opacity: 0.4;
+        }
+
+        .tab-text h3 {
+            font-size: 2rem;
+            color: var(--moss);
+            margin-bottom: 1rem;
+        }
+
+        .tab-text p {
+            color: var(--sage);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-img.weddings {
+            background: linear-gradient(135deg, #c5ceba, #dde3d4);
+        }
+
+        .tab-img.christmas {
+            background: linear-gradient(135deg, #b8c4a8, #d4dfc8);
+        }
+
+        .tab-img.seasonal {
+            background: linear-gradient(135deg, #cfc4a8, #e5dcc9);
+        }
+
+        .tab-img.corporate {
+            background: linear-gradient(135deg, #c4b8a8, #ddd4c5);
+        }
+
+        .tab-img.funerals {
+            background: linear-gradient(135deg, #b8bec4, #d0d5dc);
+        }
+
+        /* ── INSTAGRAM ── */
+        #instagram {
+            background: var(--white);
+            text-align: center;
+        }
+
+        .instagram-header {
+            margin-bottom: 3rem;
+        }
+
+        .instagram-handle {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            color: var(--sage);
+            text-decoration: none;
+            text-transform: uppercase;
+            margin-top: 1rem;
+            transition: color 0.2s;
+        }
+
+        .instagram-handle:hover {
+            color: var(--moss);
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .insta-post {
+            aspect-ratio: 1;
+            background: var(--linen);
+            position: relative;
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+
+        .insta-post::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(61, 74, 46, 0);
+            transition: background 0.3s;
+            pointer-events: none;
+        }
+
+        .insta-post:hover::after {
+            background: rgba(61, 74, 46, 0.3);
+        }
+
+        .insta-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            z-index: 1;
+            transition: opacity 0.3s;
+            color: white;
+            font-size: 1.4rem;
+            pointer-events: none;
+        }
+
+        .insta-post:hover .insta-overlay {
+            opacity: 1;
+        }
+
+        .insta-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .insta-placeholder svg {
+            width: 28px;
+            height: 28px;
+            opacity: 0.2;
+        }
+
+        .insta-post:nth-child(1) {
+            background: linear-gradient(135deg, #c5ceba, #dde3d4);
+        }
+
+        .insta-post:nth-child(2) {
+            background: linear-gradient(135deg, #cfc4a8, #e5dcc9);
+        }
+
+        .insta-post:nth-child(3) {
+            background: linear-gradient(135deg, #b8c4a8, #d4dfc8);
+        }
+
+        .insta-post:nth-child(4) {
+            background: linear-gradient(135deg, #c4b8a8, #ddd4c5);
+        }
+
+        .insta-post:nth-child(5) {
+            background: linear-gradient(135deg, #b8bec4, #d0d5dc);
+        }
+
+        .insta-post:nth-child(6) {
+            background: linear-gradient(135deg, #cfc4a8, #e5dcc9);
+        }
+
+        .insta-post:nth-child(7) {
+            background: linear-gradient(135deg, #c5ceba, #dde3d4);
+        }
+
+        .insta-post:nth-child(8) {
+            background: linear-gradient(135deg, #b8c4a8, #d4dfc8);
+        }
+
+        .insta-post:nth-child(9) {
+            background: linear-gradient(135deg, #c4b8a8, #ddd4c5);
+        }
+
+        .insta-post:nth-child(10) {
+            background: linear-gradient(135deg, #b8bec4, #d0d5dc);
+        }
+
+        .insta-note {
+            font-size: 0.78rem;
+            color: var(--petal);
+            letter-spacing: 0.05em;
+            max-width: 55ch;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ── CONTACT ── */
+        #contact {
+            background: var(--moss);
+            color: var(--cream);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        #contact .section-label {
+            color: var(--mist);
+            opacity: 0.7;
+        }
+
+        #contact .section-title {
+            color: var(--cream);
+        }
+
+        #contact .divider {
+            background: rgba(184, 196, 168, 0.3);
+        }
+
+        #contact .section-body {
+            color: var(--mist);
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-details p {
+            font-size: 0.9rem;
+            color: var(--mist);
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-details strong {
+            font-weight: 500;
+            color: var(--cream);
+        }
+
+        .contact-form {
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mist);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(184, 196, 168, 0.2);
+            color: var(--cream);
+            padding: 0.8rem 1rem;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            outline: none;
+            transition: border-color 0.2s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-group select option {
+            background: var(--moss);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(184, 196, 168, 0.4);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--mist);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--cream);
+            color: var(--moss);
+            border: none;
+            cursor: pointer;
+            padding: 1rem;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: var(--mist);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--earth);
+            color: var(--mist);
+            padding: 2.5rem 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--cream);
+            letter-spacing: 0.15em;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--mist);
+            transition: color 0.2s;
+            opacity: 0.7;
+        }
+
+        .footer-links a:hover {
+            color: var(--cream);
+            opacity: 1;
+        }
+
+        /* ── ANIMATIONS ── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-up:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+
+        .fade-up:nth-child(3) {
+            transition-delay: 0.2s;
+        }
+
+        .fade-up:nth-child(4) {
+            transition-delay: 0.3s;
+        }
+
+        .fade-up:nth-child(5) {
+            transition-delay: 0.4s;
+        }
+
+        /* ════════════════════════════════════════
+       LIGHTBOX MODAL
+       ════════════════════════════════════════ */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(26, 20, 12, 0);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease, background 0.35s ease;
+        }
+
+        .lightbox.open {
+            opacity: 1;
+            visibility: visible;
+            background: rgba(26, 20, 12, 0.92);
+        }
+
+        /* Backdrop click area */
+        .lightbox-backdrop {
+            position: absolute;
+            inset: 0;
+            cursor: zoom-out;
+        }
+
+        /* Image / content container */
+        .lightbox-content {
+            position: relative;
+            z-index: 1;
+            max-width: min(90vw, 1100px);
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: scale(0.92) translateY(12px);
+            transition: transform 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
+        }
+
+        .lightbox.open .lightbox-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .lightbox-img-wrap {
+            position: relative;
+            max-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-img-wrap img {
+            max-width: min(90vw, 1100px);
+            max-height: 80vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Placeholder shown when no real image is available */
+        .lightbox-placeholder {
+            width: min(80vw, 700px);
+            aspect-ratio: 4/3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            border: 1px solid rgba(184, 196, 168, 0.15);
+        }
+
+        .lightbox-placeholder svg {
+            width: 48px;
+            height: 48px;
+            opacity: 0.3;
+        }
+
+        .lightbox-placeholder p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: rgba(184, 196, 168, 0.5);
+            font-size: 1rem;
+        }
+
+        /* Caption */
+        .lightbox-caption {
+            margin-top: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: rgba(184, 196, 168, 0.7);
+            letter-spacing: 0.04em;
+            text-align: center;
+        }
+
+        /* Close button */
+        .lightbox-close {
+            position: fixed;
+            top: 1.5rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: rgba(184, 196, 168, 0.7);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Jost', sans-serif;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+            z-index: 2;
+        }
+
+        .lightbox-close:hover {
+            color: var(--cream);
+        }
+
+        .lightbox-close svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Prev / next arrows */
+        .lightbox-prev,
+        .lightbox-next {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(245, 240, 232, 0.08);
+            border: 1px solid rgba(184, 196, 168, 0.15);
+            color: rgba(184, 196, 168, 0.8);
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+            z-index: 2;
+        }
+
+        .lightbox-prev {
+            left: 1.5rem;
+        }
+
+        .lightbox-next {
+            right: 1.5rem;
+        }
+
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background: rgba(245, 240, 232, 0.15);
+            color: var(--cream);
+            border-color: rgba(184, 196, 168, 0.4);
+        }
+
+        .lightbox-prev svg,
+        .lightbox-next svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Counter e.g. "3 / 10" */
+        .lightbox-counter {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Jost', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: rgba(184, 196, 168, 0.45);
+            text-transform: uppercase;
+        }
+
+        /* Hide arrows when only 1 item */
+        .lightbox.single .lightbox-prev,
+        .lightbox.single .lightbox-next,
+        .lightbox.single .lightbox-counter {
+            display: none;
+        }
+
+        /* ── LOADING STATE ── */
+        body.i18n-loading {
+            visibility: hidden;
+        }
+
+        /* ── TABLET 1100px ── */
+        @media (max-width: 1100px) {
+            nav {
+                padding: 1.2rem 2.5rem;
+            }
+
+            nav.scrolled {
+                padding: 1rem 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.72rem;
+            }
+
+            section {
+                padding: 5rem 3rem;
+            }
+
+            #about {
+                padding: 5rem 3rem;
+                gap: 3rem;
+            }
+
+            footer {
+                padding: 2rem 3rem;
+            }
+        }
+
+        /* ── MOBILE 768px ── */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            nav.scrolled {
+                padding: 0.85rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-right>.lang-switcher {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            section {
+                padding: 3.5rem 1.5rem;
+            }
+
+            #hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+                padding-top: 64px;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .hero-text {
+                padding: 3rem 1.5rem 3.5rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2.8rem, 11vw, 4rem);
+            }
+
+            .hero-sub {
+                max-width: 100%;
+            }
+
+            #about {
+                grid-template-columns: 1fr;
+                padding: 3.5rem 1.5rem;
+                gap: 2rem;
+            }
+
+            .about-img-box {
+                aspect-ratio: 4/3;
+            }
+
+            .about-accent-box {
+                display: none;
+            }
+
+            .about-text {
+                padding-left: 0;
+            }
+
+            .about-quote {
+                font-size: 1.3rem;
+            }
+
+            .portfolio-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .service-card:first-child {
+                grid-column: span 1;
+            }
+
+            .service-card:first-child .service-img {
+                aspect-ratio: 16/9;
+            }
+
+            .occasions-tabs {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                flex-wrap: nowrap;
+            }
+
+            .occasions-tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab-btn {
+                padding: 0.8rem 1rem;
+                flex-shrink: 0;
+                font-size: 0.68rem;
+            }
+
+            .tab-panel.active {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .tab-img {
+                display: none;
+            }
+
+            .instagram-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+
+            #contact {
+                grid-template-columns: 1fr;
+                padding: 3.5rem 1.5rem;
+                gap: 2.5rem;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.8rem 1.5rem;
+            }
+
+            /* Lightbox adjustments on mobile */
+            .lightbox-prev {
+                left: 0.5rem;
+            }
+
+            .lightbox-next {
+                right: 0.5rem;
+            }
+
+            .lightbox-close {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 1.9rem;
+            }
+
+            .instagram-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body class="i18n-loading">
+
+    <!-- ══ NAV ══ -->
+    <nav id="main-nav">
+        <a class="nav-logo" href="#hero">Botan<span>ick</span></a>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#about" data-i18n="nav.about"></a></li>
+                <li><a href="#portfolio" data-i18n="nav.portfolio"></a></li>
+                <li><a href="#occasions" data-i18n="nav.occasions"></a></li>
+                <li><a href="#instagram" data-i18n="nav.instagram"></a></li>
+                <li><a href="#contact" data-i18n="nav.contact" class="nav-cta"></a></li>
+            </ul>
+            <div class="lang-switcher" role="group" aria-label="Language">
+                <button class="lang-btn" data-lang="nl">NL</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ══ MOBILE DRAWER ══ -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+        <a href="#about" data-i18n="nav.about" onclick="closeDrawer()"></a>
+        <a href="#portfolio" data-i18n="nav.portfolio" onclick="closeDrawer()"></a>
+        <a href="#occasions" data-i18n="nav.occasions" onclick="closeDrawer()"></a>
+        <a href="#instagram" data-i18n="nav.instagram" onclick="closeDrawer()"></a>
+        <a href="#contact" data-i18n="nav.contact" class="mobile-cta" onclick="closeDrawer()"></a>
+        <div class="lang-switcher" role="group" aria-label="Language">
+            <button class="lang-btn" data-lang="nl">NL</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="fr">FR</button>
+        </div>
+    </div>
+
+    <!-- ══ LIGHTBOX ══ -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+            Sluiten
+        </button>
+
+        <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="15 18 9 12 15 6" />
+            </svg>
+        </button>
+
+        <div class="lightbox-content">
+            <div class="lightbox-img-wrap" id="lightbox-img-wrap"></div>
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+
+        <button class="lightbox-next" id="lightbox-next" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="9 18 15 12 9 6" />
+            </svg>
+        </button>
+
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <!-- ══ HERO ══ -->
+    <section id="hero">
+        <div class="hero-text">
+            <p class="hero-eyebrow" data-i18n="hero.eyebrow"></p>
+            <h1 class="hero-title" data-i18n="[html]hero.title"></h1>
+            <p class="hero-sub" data-i18n="hero.sub"></p>
+            <div class="hero-buttons">
+                <a href="#portfolio" class="btn-primary" data-i18n="hero.cta1"></a>
+                <a href="#contact" class="btn-outline" data-i18n="hero.cta2"></a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-placeholder">
+                <!-- Replace with: <img src="hero.jpg" style="width:100%;height:100%;object-fit:cover" /> -->
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="opacity:0.25">
+                    <path d="M40 10 C40 10 20 25 20 45 C20 58 29 68 40 68 C51 68 60 58 60 45 C60 25 40 10 40 10Z"
+                        stroke="#7a8c6a" stroke-width="1.5" fill="none" />
+                    <path d="M40 20 C40 20 28 32 28 45 C28 54 33 62 40 62 C47 62 52 54 52 45 C52 32 40 20 40 20Z"
+                        stroke="#3d4a2e" stroke-width="1" fill="none" />
+                    <line x1="40" y1="68" x2="40" y2="78" stroke="#7a8c6a" stroke-width="1.5" />
+                    <path d="M33 55 Q28 48 22 50" stroke="#7a8c6a" stroke-width="1" fill="none" />
+                    <path d="M47 52 Q52 45 58 48" stroke="#7a8c6a" stroke-width="1" fill="none" />
+                </svg>
+                <p class="hero-img-hint" data-i18n="hero.imgHint"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ ABOUT ══ -->
+    <section id="about">
+        <div class="about-img-frame fade-up">
+            <div class="about-img-box">
+                <!-- Replace with: <img src="portrait.jpg" style="width:100%;height:100%;object-fit:cover" /> -->
+                <span class="about-img-caption" data-i18n="about.imgCaption"></span>
+            </div>
+            <div class="about-accent-box"></div>
+        </div>
+        <div class="about-text">
+            <span class="section-label fade-up" data-i18n="about.label"></span>
+            <h2 class="section-title fade-up" data-i18n="[html]about.title"></h2>
+            <div class="divider fade-up"></div>
+            <p class="section-body fade-up" data-i18n="about.body1"></p>
+            <blockquote class="about-quote fade-up" data-i18n="about.quote"></blockquote>
+            <p class="section-body fade-up" data-i18n="about.body2"></p>
+        </div>
+    </section>
+
+    <!-- ══ PORTFOLIO ══ -->
+    <section id="portfolio">
+        <div class="portfolio-header">
+            <div>
+                <span class="section-label" data-i18n="portfolio.label"></span>
+                <h2 class="section-title" data-i18n="portfolio.title"></h2>
+            </div>
+            <a href="#contact" class="btn-outline" data-i18n="portfolio.enquire"></a>
+        </div>
+        <div class="services-grid">
+
+            <!--
+        HOW TO ADD REAL IMAGES TO PORTFOLIO CARDS
+        ──────────────────────────────────────────
+        1. Replace the placeholder div inside .service-img with a real <img> tag:
+             <img src="images/weddings.jpg" alt="Bridal flowers" style="width:100%;height:100%;object-fit:cover" />
+        2. Keep the data-lightbox-src and data-lightbox-caption attributes on .service-img
+           to control what appears in the modal.
+        3. The zoom icon is added automatically by JS.
+      -->
+
+            <div class="service-card card-wedding fade-up">
+                <div class="service-img img-clickable" data-lightbox-group="portfolio"
+                    data-lightbox-src="images/stock-photo-caucasian-young-adult-woman-in-wedding-dress-holding-bouquet-standing-beside-caucasian-young-adult-2642823789.jpg"
+                    data-lightbox-caption="Bruids- &amp; Ceremoniebloemen">
+                    <img src="images/stock-photo-caucasian-young-adult-woman-in-wedding-dress-holding-bouquet-standing-beside-caucasian-young-adult-2642823789.jpg"
+                        alt="" style="width:100%;height:100%;object-fit:cover" />
+                    <span class="service-img-label" data-i18n="occasions.weddings"></span>
+                    <span class="img-zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="7" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="11" y1="8" x2="11" y2="14" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="service-info">
+                    <span class="service-tag" data-i18n="occasions.weddings"></span>
+                    <h3 data-i18n="portfolio.wedding.title"></h3>
+                    <p data-i18n="portfolio.wedding.desc"></p>
+                </div>
+            </div>
+
+            <div class="service-card card-seasonal fade-up">
+                <div class="service-img img-clickable" data-lightbox-group="portfolio" data-lightbox-src=""
+                    data-lightbox-caption="Seizoensarrangementen">
+                    <span class="service-img-label" data-i18n="occasions.seasonal"></span>
+                    <img src="images/stock-photo-caucasian-young-adult-woman-in-wedding-dress-holding-bouquet-standing-beside-caucasian-young-adult-2642823789.jpg"
+                        alt="" style="width:100%;height:100%;object-fit:cover" />
+                    <span class="img-zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="7" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="11" y1="8" x2="11" y2="14" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="service-info">
+                    <span class="service-tag" data-i18n="occasions.seasonal"></span>
+                    <h3 data-i18n="portfolio.seasonal.title"></h3>
+                    <p data-i18n="portfolio.seasonal.desc"></p>
+                </div>
+            </div>
+
+            <div class="service-card card-xmas fade-up">
+                <div class="service-img img-clickable" data-lightbox-group="portfolio" data-lightbox-src=""
+                    data-lightbox-caption="Kerst &amp; Winter">
+                    <span class="service-img-label" data-i18n="occasions.christmas"></span>
+                    <span class="img-zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="7" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="11" y1="8" x2="11" y2="14" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="service-info">
+                    <span class="service-tag" data-i18n="occasions.christmas"></span>
+                    <h3 data-i18n="portfolio.xmas.title"></h3>
+                    <p data-i18n="portfolio.xmas.desc"></p>
+                </div>
+            </div>
+
+            <div class="service-card card-corp fade-up">
+                <div class="service-img img-clickable" data-lightbox-group="portfolio" data-lightbox-src=""
+                    data-lightbox-caption="Zakelijke Evenementen">
+                    <span class="service-img-label" data-i18n="occasions.corporate"></span>
+                    <span class="img-zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="7" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="11" y1="8" x2="11" y2="14" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="service-info">
+                    <span class="service-tag" data-i18n="occasions.corporate"></span>
+                    <h3 data-i18n="portfolio.corp.title"></h3>
+                    <p data-i18n="portfolio.corp.desc"></p>
+                </div>
+            </div>
+
+            <div class="service-card card-funeral fade-up">
+                <div class="service-img img-clickable" data-lightbox-group="portfolio" data-lightbox-src=""
+                    data-lightbox-caption="Rouw &amp; Condoleance">
+                    <span class="service-img-label" data-i18n="occasions.funerals"></span>
+                    <span class="img-zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="7" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="11" y1="8" x2="11" y2="14" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="service-info">
+                    <span class="service-tag" data-i18n="occasions.funerals"></span>
+                    <h3 data-i18n="portfolio.funeral.title"></h3>
+                    <p data-i18n="portfolio.funeral.desc"></p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ══ OCCASIONS ══ -->
+    <section id="occasions">
+        <div class="occasions-intro">
+            <span class="section-label" data-i18n="occasions.label"></span>
+            <h2 class="section-title" data-i18n="[html]occasions.title"></h2>
+            <div class="divider"></div>
+            <p class="section-body" data-i18n="occasions.sub"></p>
+        </div>
+        <div class="occasions-tabs">
+            <button class="tab-btn active" data-tab="weddings" data-i18n="occasions.weddings"></button>
+            <button class="tab-btn" data-tab="seasonal" data-i18n="occasions.seasonal"></button>
+            <button class="tab-btn" data-tab="christmas" data-i18n="occasions.christmas"></button>
+            <button class="tab-btn" data-tab="corporate" data-i18n="occasions.corporate"></button>
+            <button class="tab-btn" data-tab="funerals" data-i18n="occasions.funerals"></button>
+        </div>
+
+        <div class="tab-panel active" id="tab-weddings">
+            <div class="tab-img weddings img-clickable" data-lightbox-group="occasions" data-lightbox-src=""
+                data-lightbox-caption="Bruiloften &amp; Bruidsbloemen">
+                <span class="tab-img-placeholder" data-i18n="hero.imgHint"></span>
+                <span class="img-zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg></span>
+            </div>
+            <div class="tab-text">
+                <h3 data-i18n="tabs.weddings.title"></h3>
+                <p data-i18n="tabs.weddings.p1"></p>
+                <p data-i18n="tabs.weddings.p2"></p>
+                <a href="#contact" class="btn-primary" data-i18n="tabs.weddings.cta"></a>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="tab-seasonal">
+            <div class="tab-img seasonal img-clickable" data-lightbox-group="occasions" data-lightbox-src=""
+                data-lightbox-caption="Seizoensarrangementen">
+                <span class="tab-img-placeholder" data-i18n="hero.imgHint"></span>
+                <span class="img-zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg></span>
+            </div>
+            <div class="tab-text">
+                <h3 data-i18n="tabs.seasonal.title"></h3>
+                <p data-i18n="tabs.seasonal.p1"></p>
+                <p data-i18n="tabs.seasonal.p2"></p>
+                <a href="#contact" class="btn-primary" data-i18n="tabs.seasonal.cta"></a>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="tab-christmas">
+            <div class="tab-img christmas img-clickable" data-lightbox-group="occasions" data-lightbox-src=""
+                data-lightbox-caption="Kerst &amp; Winter">
+                <span class="tab-img-placeholder" data-i18n="hero.imgHint"></span>
+                <span class="img-zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg></span>
+            </div>
+            <div class="tab-text">
+                <h3 data-i18n="tabs.christmas.title"></h3>
+                <p data-i18n="tabs.christmas.p1"></p>
+                <p data-i18n="tabs.christmas.p2"></p>
+                <a href="#contact" class="btn-primary" data-i18n="tabs.christmas.cta"></a>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="tab-corporate">
+            <div class="tab-img corporate img-clickable" data-lightbox-group="occasions" data-lightbox-src=""
+                data-lightbox-caption="Zakelijke Evenementen">
+                <span class="tab-img-placeholder" data-i18n="hero.imgHint"></span>
+                <span class="img-zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg></span>
+            </div>
+            <div class="tab-text">
+                <h3 data-i18n="tabs.corporate.title"></h3>
+                <p data-i18n="tabs.corporate.p1"></p>
+                <p data-i18n="tabs.corporate.p2"></p>
+                <a href="#contact" class="btn-primary" data-i18n="tabs.corporate.cta"></a>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="tab-funerals">
+            <div class="tab-img funerals img-clickable" data-lightbox-group="occasions" data-lightbox-src=""
+                data-lightbox-caption="Rouw &amp; Condoleance">
+                <span class="tab-img-placeholder" data-i18n="hero.imgHint"></span>
+                <span class="img-zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg></span>
+            </div>
+            <div class="tab-text">
+                <h3 data-i18n="tabs.funerals.title"></h3>
+                <p data-i18n="tabs.funerals.p1"></p>
+                <p data-i18n="tabs.funerals.p2"></p>
+                <a href="#contact" class="btn-primary" data-i18n="tabs.funerals.cta"></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ INSTAGRAM ══ -->
+    <section id="instagram">
+        <div class="instagram-header">
+            <span class="section-label" data-i18n="instagram.label"></span>
+            <h2 class="section-title" data-i18n="instagram.title"></h2>
+            <a href="https://instagram.com/botanick" target="_blank" rel="noopener" class="instagram-handle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="2" y="2" width="20" height="20" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                </svg>
+                @botanick
+            </a>
+        </div>
+        <!--
+      INSTAGRAM INTEGRATION
+      Option 1 (recommended) — serverless proxy on Vercel/Netlify:
+        1. Get an Instagram Basic Display API token
+        2. Store as env var INSTAGRAM_TOKEN (never put it in this file)
+        3. Create /api/instagram.js:
+             export default async function handler(req, res) {
+               const url = `https://graph.instagram.com/me/media?fields=id,media_type,media_url,permalink,thumbnail_url&access_token=${process.env.INSTAGRAM_TOKEN}`;
+               res.json(await fetch(url).then(r => r.json()));
+             }
+        4. Uncomment the loadInstagramFeed() call below
+      Option 2 — SnapWidget free embed: https://snapwidget.com
+    -->
+        <div class="instagram-grid" id="ig-grid"></div>
+        <p class="insta-note" data-i18n="[html]instagram.note"></p>
+    </section>
+
+    <!-- ══ CONTACT ══ -->
+    <section id="contact">
+        <div>
+            <span class="section-label" data-i18n="contact.label"></span>
+            <h2 class="section-title" style="color:var(--cream)" data-i18n="[html]contact.title"></h2>
+            <div class="divider"></div>
+            <p class="section-body" data-i18n="contact.body"></p>
+            <div class="contact-details">
+                <p><strong data-i18n="contact.emailLabel"></strong><br>hello@botanick.be</p>
+                <p><strong>Instagram</strong><br>@botanick</p>
+                <p><strong data-i18n="contact.basedLabel"></strong><br>Belgium</p>
+            </div>
+        </div>
+        <div class="contact-form">
+            <div class="form-group">
+                <label data-i18n="form.name"></label>
+                <input type="text" data-i18n="[placeholder]form.namePh" />
+            </div>
+            <div class="form-group">
+                <label data-i18n="form.email"></label>
+                <input type="email" data-i18n="[placeholder]form.emailPh" />
+            </div>
+            <div class="form-group">
+                <label data-i18n="form.occasion"></label>
+                <select id="occasion-select">
+                    <option value="" data-i18n="form.occasionPh"></option>
+                    <option data-i18n="occasions.weddings"></option>
+                    <option data-i18n="occasions.seasonal"></option>
+                    <option data-i18n="occasions.christmas"></option>
+                    <option data-i18n="occasions.corporate"></option>
+                    <option data-i18n="occasions.funerals"></option>
+                    <option data-i18n="form.other"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label data-i18n="form.message"></label>
+                <textarea data-i18n="[placeholder]form.messagePh"></textarea>
+            </div>
+            <button class="btn-submit" onclick="handleFormSubmit(event)" data-i18n="form.submit"></button>
+        </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <footer>
+        <span class="footer-logo">Botanick</span>
+        <ul class="footer-links">
+            <li><a href="#about" data-i18n="nav.about"></a></li>
+            <li><a href="#portfolio" data-i18n="nav.portfolio"></a></li>
+            <li><a href="#occasions" data-i18n="nav.occasions"></a></li>
+            <li><a href="#instagram" data-i18n="nav.instagram"></a></li>
+            <li><a href="#contact" data-i18n="nav.contact2"></a></li>
+        </ul>
+        <span style="opacity:0.45" data-i18n="footer.copy"></span>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/23.11.5/i18next.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/2.5.2/i18nextHttpBackend.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/8.0.0/i18nextBrowserLanguageDetector.min.js"></script>
+
+    <script>
+        // ══════════════════════════════════════════════
+        // i18next
+        // ══════════════════════════════════════════════
+        i18next
+            .use(i18nextHttpBackend)
+            .use(i18nextBrowserLanguageDetector)
+            .init({
+                fallbackLng: 'nl',
+                supportedLngs: ['nl', 'en', 'fr'],
+                nonExplicitSupportedLngs: true,
+                backend: { loadPath: '/locales/{{lng}}.json' },
+                detection: { order: ['localStorage', 'navigator'], lookupLocalStorage: 'botanick-lang', caches: ['localStorage'] }
+            }, function () {
+                renderAll();
+                document.body.classList.remove('i18n-loading');
+            });
+
+        function renderAll() {
+            const lng = i18next.language;
+            document.documentElement.lang = lng;
+            document.title = i18next.t('page.title');
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lng));
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                el.getAttribute('data-i18n').split(';').map(s => s.trim()).forEach(binding => {
+                    const m = binding.match(/^\[(\w+)\](.+)$/);
+                    const mod = m ? m[1] : 'text', key = m ? m[2] : binding, val = i18next.t(key);
+                    if (mod === 'html') el.innerHTML = val;
+                    else if (mod === 'placeholder') el.placeholder = val;
+                    else el.textContent = val;
+                });
+            });
+            // Also update lightbox close label based on language
+            const closeBtn = document.getElementById('lightbox-close');
+            const closeLabels = { nl: 'Sluiten', en: 'Close', fr: 'Fermer' };
+            if (closeBtn) closeBtn.lastChild.textContent = closeLabels[lng] || 'Sluiten';
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => i18next.changeLanguage(btn.dataset.lang, renderAll));
+        });
+
+        // ══════════════════════════════════════════════
+        // NAV SCROLL
+        // ══════════════════════════════════════════════
+        const mainNav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => mainNav.classList.toggle('scrolled', window.scrollY > 50));
+
+        // ══════════════════════════════════════════════
+        // FADE-UP
+        // ══════════════════════════════════════════════
+        const obs = new IntersectionObserver(
+            entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+            { threshold: 0.1 }
+        );
+        document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+        // ══════════════════════════════════════════════
+        // OCCASION TABS
+        // ══════════════════════════════════════════════
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        // ══════════════════════════════════════════════
+        // HAMBURGER / DRAWER
+        // ══════════════════════════════════════════════
+        const hamburgerBtn = document.getElementById('hamburger');
+        const drawer = document.getElementById('mobile-drawer');
+
+        hamburgerBtn.addEventListener('click', () => {
+            const isOpen = drawer.classList.toggle('open');
+            hamburgerBtn.classList.toggle('open', isOpen);
+            hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+            drawer.setAttribute('aria-hidden', String(!isOpen));
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        function closeDrawer() {
+            drawer.classList.remove('open');
+            hamburgerBtn.classList.remove('open');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            drawer.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        // ══════════════════════════════════════════════
+        // LIGHTBOX
+        // ══════════════════════════════════════════════
+        const lightbox = document.getElementById('lightbox');
+        const lbImgWrap = document.getElementById('lightbox-img-wrap');
+        const lbCaption = document.getElementById('lightbox-caption');
+        const lbCounter = document.getElementById('lightbox-counter');
+        const lbPrev = document.getElementById('lightbox-prev');
+        const lbNext = document.getElementById('lightbox-next');
+
+        let lbItems = [];   // all clickable items in the current group
+        let lbIndex = 0;    // currently shown index
+
+        // Collect all elements with data-lightbox-group and attach click handlers
+        function initLightbox() {
+            document.querySelectorAll('[data-lightbox-group]').forEach(el => {
+                el.addEventListener('click', () => {
+                    const group = el.dataset.lightboxGroup;
+                    lbItems = Array.from(document.querySelectorAll(`[data-lightbox-group="${group}"]`));
+                    lbIndex = lbItems.indexOf(el);
+                    openLightbox(lbIndex);
+                });
+            });
+
+            // Instagram posts (added dynamically — delegated)
+            document.getElementById('ig-grid').addEventListener('click', e => {
+                const post = e.target.closest('.insta-post');
+                if (!post) return;
+                lbItems = Array.from(document.querySelectorAll('#ig-grid .insta-post'));
+                lbIndex = lbItems.indexOf(post);
+                openLightbox(lbIndex);
+            });
+        }
+
+        function openLightbox(index) {
+            lbIndex = index;
+            renderLightboxSlide();
+            lightbox.classList.add('open');
+            lightbox.classList.toggle('single', lbItems.length <= 1);
+            document.body.style.overflow = 'hidden';
+            lightbox.focus();
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+            // Return focus to the triggering element
+            if (lbItems[lbIndex]) lbItems[lbIndex].focus();
+        }
+
+        function renderLightboxSlide() {
+            const el = lbItems[lbIndex];
+            const src = el ? el.dataset.lightboxSrc : '';
+            const caption = el ? (el.dataset.lightboxCaption || '') : '';
+
+            lbImgWrap.innerHTML = '';
+
+            if (src) {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = caption;
+                lbImgWrap.appendChild(img);
+            } else {
+                // Show a styled placeholder (until real images are added)
+                lbImgWrap.innerHTML = `
+        <div class="lightbox-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b8c4a8" stroke-width="1">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+          <p>Voeg een afbeelding toe via data-lightbox-src</p>
+        </div>`;
+            }
+
+            lbCaption.innerHTML = caption;
+            lbCounter.textContent = lbItems.length > 1 ? `${lbIndex + 1} / ${lbItems.length}` : '';
+        }
+
+        function lightboxPrev() { lbIndex = (lbIndex - 1 + lbItems.length) % lbItems.length; renderLightboxSlide(); }
+        function lightboxNext() { lbIndex = (lbIndex + 1) % lbItems.length; renderLightboxSlide(); }
+
+        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        document.getElementById('lightbox-backdrop').addEventListener('click', closeLightbox);
+        lbPrev.addEventListener('click', lightboxPrev);
+        lbNext.addEventListener('click', lightboxNext);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', e => {
+            if (!lightbox.classList.contains('open')) {
+                if (e.key === 'Escape') closeDrawer();
+                return;
+            }
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') lightboxPrev();
+            if (e.key === 'ArrowRight') lightboxNext();
+        });
+
+        // Touch / swipe support
+        let touchStartX = 0;
+        lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+        lightbox.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) > 50) dx < 0 ? lightboxNext() : lightboxPrev();
+        }, { passive: true });
+
+        // ══════════════════════════════════════════════
+        // INSTAGRAM MOCK GRID
+        // ══════════════════════════════════════════════
+        function buildMockGrid() {
+            const grid = document.getElementById('ig-grid');
+            grid.innerHTML = '';
+            for (let i = 0; i < 10; i++) {
+                const post = document.createElement('div');
+                post.className = 'insta-post';
+                // Store empty src; when real images load, set data-lightbox-src on each .insta-post
+                post.dataset.lightboxGroup = 'instagram';
+                post.dataset.lightboxSrc = '';
+                post.dataset.lightboxCaption = `@botanick`;
+                post.innerHTML = `
+        <div class="insta-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7a8c6a" stroke-width="1.2">
+            <rect x="3" y="3" width="18" height="18" rx="4"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17" cy="7" r="1.2" fill="#7a8c6a" stroke="none"/>
+          </svg>
+        </div>
+        <div class="insta-overlay">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+            <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+          </svg>
+        </div>`;
+                grid.appendChild(post);
+            }
+            initLightbox(); // re-init after dynamic content is added
+        }
+
+        // LIVE FEED — uncomment when proxy is ready:
+        /*
+        async function loadInstagramFeed() {
+          const grid = document.getElementById('ig-grid');
+          try {
+            const res  = await fetch('/api/instagram');
+            const data = await res.json();
+            (data.data || []).slice(0, 10).forEach(post => {
+              const imgSrc = post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url;
+              const el = document.createElement('div');
+              el.className = 'insta-post';
+              el.dataset.lightboxGroup   = 'instagram';
+              el.dataset.lightboxSrc     = imgSrc;
+              el.dataset.lightboxCaption = '@botanick';
+              el.innerHTML = `<img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover" loading="lazy"/>
+                              <div class="insta-overlay">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                                  <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                  <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                                </svg>
+                              </div>`;
+              grid.appendChild(el);
+            });
+          } catch (e) { buildMockGrid(); return; }
+          initLightbox();
+        }
+        loadInstagramFeed();
+        */
+
+        buildMockGrid();
+        initLightbox(); // init for portfolio + occasions (static elements)
+
+        // ══════════════════════════════════════════════
+        // CONTACT FORM
+        // ══════════════════════════════════════════════
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert(i18next.t('form.successMsg'));
+        }
+    </script>
+</body>
+
+</html>
