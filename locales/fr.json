@@ -103,7 +103,8 @@
         "title": "Créons quelque<br>chose de<br><em>beau</em>",
         "body": "Que vous ayez un projet en tête ou que vous commenciez à rêver, contactez-nous. Chaque projet commence par une conversation.",
         "emailLabel": "E-mail",
-        "basedLabel": "Basé en"
+        "basedLabel": "Basé en",
+        "based": "Belgique"
     },
     "form": {
         "name": "Votre nom",

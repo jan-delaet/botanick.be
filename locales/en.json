@@ -103,7 +103,8 @@
         "title": "Let's create<br>something<br><em>beautiful</em>",
         "body": "Whether you have a brief in mind or are just beginning to dream, reach out. Every project starts with a conversation.",
         "emailLabel": "Email",
-        "basedLabel": "Based in"
+        "basedLabel": "Based in",
+        "based": "Belgium"
     },
     "form": {
         "name": "Your name",

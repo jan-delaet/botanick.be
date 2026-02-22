@@ -95,7 +95,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(
 function buildMockGrid() {
     const grid = document.getElementById('ig-grid');
     grid.innerHTML = '';
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 5; i++) {
         const post = document.createElement('div');
         post.className = 'insta-post';
         post.innerHTML = `
@@ -112,25 +112,23 @@ function buildMockGrid() {
 }
 
 // LIVE FEED — uncomment when proxy is ready:
-/*
 async function loadInstagramFeed() {
-  const grid = document.getElementById('ig-grid');
-  try {
-    const res  = await fetch('/api/instagram');
-    const data = await res.json();
-    (data.data || []).slice(0, 10).forEach(post => {
-      const img = post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url;
-      const a   = document.createElement('a');
-      a.className = 'insta-post';
-      a.href = post.permalink; a.target = '_blank'; a.rel = 'noopener';
-      a.innerHTML = `<img src="${img}" style="width:100%;height:100%;object-fit:cover" loading="lazy"/>
+    const grid = document.getElementById('ig-grid');
+    try {
+        const res = await fetch('http://localhost:8080/api/instagram');
+        const data = await res.json();
+        (data.data || []).slice(0, 5).forEach(post => {
+            const img = post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url;
+            const a = document.createElement('a');
+            a.className = 'insta-post';
+            a.href = post.permalink; a.target = '_blank'; a.rel = 'noopener';
+            a.innerHTML = `<img src="${img}" style="width:100%;height:100%;object-fit:cover" loading="lazy"/>
                      <div class="insta-overlay">&#8599;</div>`;
-      grid.appendChild(a);
-    });
-  } catch (e) { buildMockGrid(); }
+            grid.appendChild(a);
+        });
+    } catch (e) { buildMockGrid(); }
 }
-loadInstagramFeed();
-*/
+// loadInstagramFeed();
 buildMockGrid();
 
 // Contact form
