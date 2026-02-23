@@ -4,7 +4,8 @@ i18next
     .use(i18nextHttpBackend)
     .use(i18nextBrowserLanguageDetector)
     .init({
-        fallbackLng: 'nl', supportedLngs: ['nl', 'en', 'fr'], nonExplicitSupportedLngs: true,
+        // fallbackLng: 'nl', supportedLngs: ['nl', 'en', 'fr'], nonExplicitSupportedLngs: true,
+        fallbackLng: 'nl', supportedLngs: ['nl', 'en'], nonExplicitSupportedLngs: true,
         backend: { loadPath: './locales/{{lng}}.json' },
         detection: { order: ['localStorage', 'navigator'], lookupLocalStorage: 'botanick-lang', caches: ['localStorage'] }
     }, function () { renderAll(); document.body.classList.remove('i18n-loading'); });
@@ -23,7 +24,8 @@ function renderAll() {
             else el.textContent = val;
         });
     });
-    const labels = { nl: 'Sluiten', en: 'Close', fr: 'Fermer' };
+    // const labels = { nl: 'Sluiten', en: 'Close', fr: 'Fermer' };
+    const labels = { nl: 'Sluiten', en: 'Close' };
     document.getElementById('lb-close-label').textContent = labels[lng] || 'Sluiten';
     // If lightbox is open, re-render caption in new language
     if (document.getElementById('lightbox').classList.contains('open')) renderSlide();
