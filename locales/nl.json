@@ -103,7 +103,8 @@
         "title": "Laat ons iets<br><em>moois</em><br>creëren",
         "body": "Of je nu een idee hebt of nog aan het dromen bent — neem contact op. Elk project begint met een gesprek.",
         "emailLabel": "E-mail",
-        "basedLabel": "Gevestigd in"
+        "basedLabel": "Gevestigd in",
+        "based": "België"
     },
     "form": {
         "name": "Jouw naam",

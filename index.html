@@ -4,21 +4,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Botanick — Bloemenontwerp</title>
+    <title>Botanick</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css">
-
-    <link rel="icon" href="images/favicon.svg" sizes="any" type="image/svg+xml">
-
 </head>
 
 <body class="i18n-loading">
 
-    <!-- NAV -->
     <nav id="main-nav">
         <a class="nav-logo" href="#hero">Botan<span>ick</span></a>
         <div class="nav-right">
@@ -32,26 +31,65 @@
             <div class="lang-switcher" role="group" aria-label="Language">
                 <button class="lang-btn" data-lang="nl">NL</button>
                 <button class="lang-btn" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="fr">FR</button>
+                <!-- <button class="lang-btn" data-lang="fr">FR</button> -->
             </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <!-- HERO -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+        <a href="#about" data-i18n="nav.about" onclick="closeDrawer()"></a>
+        <a href="#portfolio" data-i18n="nav.portfolio" onclick="closeDrawer()"></a>
+        <a href="#occasions" data-i18n="nav.occasions" onclick="closeDrawer()"></a>
+        <a href="#instagram" data-i18n="nav.instagram" onclick="closeDrawer()"></a>
+        <a href="#contact" data-i18n="nav.contact" class="mobile-cta" onclick="closeDrawer()"></a>
+        <div class="lang-switcher" role="group" aria-label="Language">
+            <button class="lang-btn" data-lang="nl">NL</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+            <!-- <button class="lang-btn" data-lang="fr">FR</button> -->
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" tabindex="-1">
+        <div class="lightbox-backdrop" id="lb-backdrop"></div>
+        <button class="lightbox-close" id="lb-close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+            <span id="lb-close-label">Sluiten</span>
+        </button>
+        <button class="lightbox-prev" id="lb-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <polyline points="15 18 9 12 15 6" />
+            </svg></button>
+        <div class="lightbox-content">
+            <div class="lightbox-img-wrap" id="lb-img-wrap"></div>
+            <p class="lightbox-caption" id="lb-caption"></p>
+        </div>
+        <button class="lightbox-next" id="lb-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5">
+                <polyline points="9 18 15 12 9 6" />
+            </svg></button>
+        <div class="lightbox-counter" id="lb-counter"></div>
+    </div>
+
     <section id="hero">
         <div class="hero-text">
             <p class="hero-eyebrow" data-i18n="hero.eyebrow"></p>
             <h1 class="hero-title" data-i18n="[html]hero.title"></h1>
             <p class="hero-sub" data-i18n="hero.sub"></p>
-            <div>
+            <div class="hero-buttons">
                 <a href="#portfolio" class="btn-primary" data-i18n="hero.cta1"></a>
                 <a href="#contact" class="btn-outline" data-i18n="hero.cta2"></a>
             </div>
         </div>
         <div class="hero-visual">
-            <div class="hero-placeholder">
-                <!-- Replace with: <img src="hero.jpg" style="width:100%;height:100%;object-fit:cover" /> -->
-                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="opacity:0.25">
+            <img src="images/portrait.jpg" style="width:100%; height: 100%;" alt="Botanick">
+            <!-- <div class="hero-placeholder">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="opacity:.25">
                     <path d="M40 10 C40 10 20 25 20 45 C20 58 29 68 40 68 C51 68 60 58 60 45 C60 25 40 10 40 10Z"
                         stroke="#7a8c6a" stroke-width="1.5" fill="none" />
                     <path d="M40 20 C40 20 28 32 28 45 C28 54 33 62 40 62 C47 62 52 54 52 45 C52 32 40 20 40 20Z"
@@ -61,16 +99,15 @@
                     <path d="M47 52 Q52 45 58 48" stroke="#7a8c6a" stroke-width="1" fill="none" />
                 </svg>
                 <p class="hero-img-hint" data-i18n="hero.imgHint"></p>
-            </div>
+            </div> -->
         </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about">
         <div class="about-img-frame fade-up">
             <div class="about-img-box">
-                <!-- Replace with: <img src="portrait.jpg" style="width:100%;height:100%;object-fit:cover" /> -->
-                <span class="about-img-caption" data-i18n="about.imgCaption"></span>
+                <img src="images/portrait.jpg" style="width:100%; height: 100%;" alt="Botanick">
+                <!-- <span class="about-img-caption" data-i18n="about.imgCaption"></span> -->
             </div>
             <div class="about-accent-box"></div>
         </div>
@@ -84,52 +121,105 @@
         </div>
     </section>
 
-    <!-- PORTFOLIO -->
+    <!-- PORTFOLIO
+    HOW TO ADD IMAGES: drop an <img> inside the .service-img element.
+    The lightbox reads src and uses the data-caption-i18n key for the translated caption.
+    Example:
+      <div class="service-img" data-lightbox="portfolio" data-caption-i18n="portfolio.wedding.title">
+        <img src="images/weddings.jpg" />
+      </div>
+  -->
     <section id="portfolio">
         <div class="portfolio-header">
             <div>
                 <span class="section-label" data-i18n="portfolio.label"></span>
                 <h2 class="section-title" data-i18n="portfolio.title"></h2>
             </div>
-            <a href="#contact" class="btn-outline" style="margin-bottom:0.5rem" data-i18n="portfolio.enquire"></a>
+            <a href="#contact" class="btn-outline" data-i18n="portfolio.enquire"></a>
         </div>
         <div class="services-grid">
             <div class="service-card card-wedding fade-up">
-                <div class="service-img"><span class="service-img-label" data-i18n="occasions.weddings"></span></div>
-                <div class="service-info">
-                    <span class="service-tag" data-i18n="occasions.weddings"></span>
+                <div class="service-img" data-lightbox="portfolio" data-caption-i18n="portfolio.wedding.title">
+                    <!-- <img src="images/weddings.jpg" /> -->
+                    <img src="images/wedding.jpg" style="width:100%; height: 100%;" alt="Botanick">
+                    <!-- <span class="service-img-label" data-i18n="occasions.weddings"></span> -->
+                    <span class="lb-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="7" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="11" y1="8" x2="11" y2="14" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg></span>
+                </div>
+                <div class="service-info"><span class="service-tag" data-i18n="occasions.weddings"></span>
                     <h3 data-i18n="portfolio.wedding.title"></h3>
                     <p data-i18n="portfolio.wedding.desc"></p>
                 </div>
             </div>
             <div class="service-card card-seasonal fade-up">
-                <div class="service-img"><span class="service-img-label" data-i18n="occasions.seasonal"></span></div>
-                <div class="service-info">
-                    <span class="service-tag" data-i18n="occasions.seasonal"></span>
+                <div class="service-img" data-lightbox="portfolio" data-caption-i18n="portfolio.seasonal.title">
+                    <!-- <img src="images/seasonal.jpg" /> -->
+                    <img src="images/seasonal.jpg" style="width:100%; height: 100%;" alt="Botanick">
+                    <!-- <span class="service-img-label" data-i18n="occasions.seasonal"></span> -->
+                    <span class="lb-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="7" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="11" y1="8" x2="11" y2="14" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg></span>
+                </div>
+                <div class="service-info"><span class="service-tag" data-i18n="occasions.seasonal"></span>
                     <h3 data-i18n="portfolio.seasonal.title"></h3>
                     <p data-i18n="portfolio.seasonal.desc"></p>
                 </div>
             </div>
             <div class="service-card card-xmas fade-up">
-                <div class="service-img"><span class="service-img-label" data-i18n="occasions.christmas"></span></div>
-                <div class="service-info">
-                    <span class="service-tag" data-i18n="occasions.christmas"></span>
+                <div class="service-img" data-lightbox="portfolio" data-caption-i18n="portfolio.xmas.title">
+                    <!-- <img src="images/christmas.jpg" /> -->
+
+                    <img src="images/christmas.jpg" style="width:100%; height: 100%;" alt="Botanick">
+                    <!-- <span class="service-img-label" data-i18n="occasions.christmas"></span> -->
+                    <span class="lb-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="7" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="11" y1="8" x2="11" y2="14" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg></span>
+                </div>
+                <div class="service-info"><span class="service-tag" data-i18n="occasions.christmas"></span>
                     <h3 data-i18n="portfolio.xmas.title"></h3>
                     <p data-i18n="portfolio.xmas.desc"></p>
                 </div>
             </div>
             <div class="service-card card-corp fade-up">
-                <div class="service-img"><span class="service-img-label" data-i18n="occasions.corporate"></span></div>
-                <div class="service-info">
-                    <span class="service-tag" data-i18n="occasions.corporate"></span>
+                <div class="service-img" data-lightbox="portfolio" data-caption-i18n="portfolio.corp.title">
+                    <!-- <img src="images/corporate.jpg" /> -->
+                    <img src="images/business.jpg" style="width:100%; height: 100%;" alt="Botanick">
+                    <!-- <span class="service-img-label" data-i18n="occasions.corporate"></span> -->
+                    <span class="lb-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="7" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="11" y1="8" x2="11" y2="14" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg></span>
+                </div>
+                <div class="service-info"><span class="service-tag" data-i18n="occasions.corporate"></span>
                     <h3 data-i18n="portfolio.corp.title"></h3>
                     <p data-i18n="portfolio.corp.desc"></p>
                 </div>
             </div>
             <div class="service-card card-funeral fade-up">
-                <div class="service-img"><span class="service-img-label" data-i18n="occasions.funerals"></span></div>
-                <div class="service-info">
-                    <span class="service-tag" data-i18n="occasions.funerals"></span>
+                <div class="service-img" data-lightbox="portfolio" data-caption-i18n="portfolio.funeral.title">
+                    <!-- <img src="images/funerals.jpg" /> -->
+                    <img src="images/funeral.jpg" style="width:100%; height: 100%;" alt="Botanick">
+                    <!-- <span class="service-img-label" data-i18n="occasions.funerals"></span> -->
+                    <span class="lb-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="7" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="11" y1="8" x2="11" y2="14" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg></span>
+                </div>
+                <div class="service-info"><span class="service-tag" data-i18n="occasions.funerals"></span>
                     <h3 data-i18n="portfolio.funeral.title"></h3>
                     <p data-i18n="portfolio.funeral.desc"></p>
                 </div>
@@ -137,7 +227,6 @@
         </div>
     </section>
 
-    <!-- OCCASIONS -->
     <section id="occasions">
         <div class="occasions-intro">
             <span class="section-label" data-i18n="occasions.label"></span>
@@ -152,55 +241,103 @@
             <button class="tab-btn" data-tab="corporate" data-i18n="occasions.corporate"></button>
             <button class="tab-btn" data-tab="funerals" data-i18n="occasions.funerals"></button>
         </div>
-
         <div class="tab-panel active" id="tab-weddings">
-            <div class="tab-img weddings"><span class="tab-img-placeholder" data-i18n="hero.imgHint"></span></div>
+            <div class="tab-img weddings" data-lightbox="occasions" data-caption-i18n="tabs.weddings.title">
+                <img src="images/wedding.jpg" style="width:100%; height: 100%;" alt="Botanick">
+                <!-- <img src="images/weddings-full.jpg" /> -->
+                <!-- <span class="tab-img-placeholder" data-i18n="hero.imgHint"></span> -->
+                <span class="lb-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg></span>
+            </div>
             <div class="tab-text">
                 <h3 data-i18n="tabs.weddings.title"></h3>
                 <p data-i18n="tabs.weddings.p1"></p>
-                <p data-i18n="tabs.weddings.p2"></p>
-                <a href="#contact" class="btn-primary" data-i18n="tabs.weddings.cta"></a>
+                <p data-i18n="tabs.weddings.p2"></p><a href="#contact" class="btn-primary"
+                    data-i18n="tabs.weddings.cta"></a>
             </div>
         </div>
         <div class="tab-panel" id="tab-seasonal">
-            <div class="tab-img seasonal"><span class="tab-img-placeholder" data-i18n="hero.imgHint"></span></div>
+            <div class="tab-img seasonal" data-lightbox="occasions" data-caption-i18n="tabs.seasonal.title">
+                <img src="images/seasonal.jpg" style="width:100%; height: 100%;" alt="Botanick">
+                <!-- <img src="images/seasonal-full.jpg" /> -->
+                <!-- <span class="tab-img-placeholder" data-i18n="hero.imgHint"></span> -->
+                <span class="lb-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg></span>
+            </div>
             <div class="tab-text">
                 <h3 data-i18n="tabs.seasonal.title"></h3>
                 <p data-i18n="tabs.seasonal.p1"></p>
-                <p data-i18n="tabs.seasonal.p2"></p>
-                <a href="#contact" class="btn-primary" data-i18n="tabs.seasonal.cta"></a>
+                <p data-i18n="tabs.seasonal.p2"></p><a href="#contact" class="btn-primary"
+                    data-i18n="tabs.seasonal.cta"></a>
             </div>
         </div>
         <div class="tab-panel" id="tab-christmas">
-            <div class="tab-img christmas"><span class="tab-img-placeholder" data-i18n="hero.imgHint"></span></div>
+            <div class="tab-img christmas" data-lightbox="occasions" data-caption-i18n="tabs.christmas.title">
+                <img src="images/christmas.jpg" style="width:100%; height: 100%;" alt="Botanick">
+                <!-- <img src="images/christmas-full.jpg" /> -->
+                <!-- <span class="tab-img-placeholder" data-i18n="hero.imgHint"></span> -->
+                <span class="lb-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg></span>
+            </div>
             <div class="tab-text">
                 <h3 data-i18n="tabs.christmas.title"></h3>
                 <p data-i18n="tabs.christmas.p1"></p>
-                <p data-i18n="tabs.christmas.p2"></p>
-                <a href="#contact" class="btn-primary" data-i18n="tabs.christmas.cta"></a>
+                <p data-i18n="tabs.christmas.p2"></p><a href="#contact" class="btn-primary"
+                    data-i18n="tabs.christmas.cta"></a>
             </div>
         </div>
         <div class="tab-panel" id="tab-corporate">
-            <div class="tab-img corporate"><span class="tab-img-placeholder" data-i18n="hero.imgHint"></span></div>
+            <div class="tab-img corporate" data-lightbox="occasions" data-caption-i18n="tabs.corporate.title">
+                <img src="images/business.jpg" style="width:100%; height: 100%;" alt="Botanick">
+                <!-- <img src="images/corporate-full.jpg" /> -->
+                <!-- <span class="tab-img-placeholder" data-i18n="hero.imgHint"></span> -->
+                <span class="lb-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg></span>
+            </div>
             <div class="tab-text">
                 <h3 data-i18n="tabs.corporate.title"></h3>
                 <p data-i18n="tabs.corporate.p1"></p>
-                <p data-i18n="tabs.corporate.p2"></p>
-                <a href="#contact" class="btn-primary" data-i18n="tabs.corporate.cta"></a>
+                <p data-i18n="tabs.corporate.p2"></p><a href="#contact" class="btn-primary"
+                    data-i18n="tabs.corporate.cta"></a>
             </div>
         </div>
         <div class="tab-panel" id="tab-funerals">
-            <div class="tab-img funerals"><span class="tab-img-placeholder" data-i18n="hero.imgHint"></span></div>
+            <div class="tab-img funerals" data-lightbox="occasions" data-caption-i18n="tabs.funerals.title">
+                <img src="images/funeral.jpg" style="width:100%; height: 100%;" alt="Botanick">
+                <!-- <img src="images/funerals-full.jpg" /> -->
+                <!-- <span class="tab-img-placeholder" data-i18n="hero.imgHint"></span> -->
+                <span class="lb-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg></span>
+            </div>
             <div class="tab-text">
                 <h3 data-i18n="tabs.funerals.title"></h3>
                 <p data-i18n="tabs.funerals.p1"></p>
-                <p data-i18n="tabs.funerals.p2"></p>
-                <a href="#contact" class="btn-primary" data-i18n="tabs.funerals.cta"></a>
+                <p data-i18n="tabs.funerals.p2"></p><a href="#contact" class="btn-primary"
+                    data-i18n="tabs.funerals.cta"></a>
             </div>
         </div>
     </section>
 
-    <!-- INSTAGRAM -->
     <section id="instagram">
         <div class="instagram-header">
             <span class="section-label" data-i18n="instagram.label"></span>
@@ -214,27 +351,10 @@
                 @botanick_be
             </a>
         </div>
-        <!--
-      INSTAGRAM INTEGRATIE — VEILIG KOPPELEN ZONDER API-SLEUTEL IN DE CODE
-      ─────────────────────────────────────────────────────────────────────
-      OPTIE 1 (aanbevolen) — gratis serverless proxy via Vercel of Netlify:
-      1. Maak een Facebook Developer App en haal een Instagram Basic Display API-token op.
-      2. Sla dit op als omgevingsvariabele (bijv. INSTAGRAM_TOKEN). Zet dit NOOIT in deze HTML.
-      3. Maak een serverless functie /api/instagram.js:
-           export default async function handler(req, res) {
-             const token = process.env.INSTAGRAM_TOKEN;
-             const url = `https://graph.instagram.com/me/media?fields=id,media_type,media_url,permalink,thumbnail_url&access_token=${token}`;
-             const data = await fetch(url).then(r => r.json());
-             res.json(data);
-           }
-      4. Uncomment het "Live feed" blok in de JS hieronder.
-      OPTIE 2 — SnapWidget (geen code, gratis tier): https://snapwidget.com
-    -->
         <div class="instagram-grid" id="ig-grid"></div>
-        <p class="insta-note" data-i18n="[html]instagram.note"></p>
+        <!-- <p class="insta-note" data-i18n="[html]instagram.note"></p> -->
     </section>
 
-    <!-- CONTACT -->
     <section id="contact">
         <div>
             <span class="section-label" data-i18n="contact.label"></span>
@@ -242,23 +362,21 @@
             <div class="divider"></div>
             <p class="section-body" data-i18n="contact.body"></p>
             <div class="contact-details">
-                <p><strong data-i18n="contact.emailLabel"></strong><br>contact@botanick.be</p>
-                <p><strong>Instagram</strong><br>@botanick_be</p>
-                <p><strong data-i18n="contact.basedLabel"></strong><br>België</p>
+                <p><strong data-i18n="contact.emailLabel"></strong><br><a
+                        href="mailto:contact@botanick.be">contact@botanick.be</a></p>
+                <p><strong>Instagram</strong><br><a href="https://instagram.com/botanick_be">@botanick_be</a></p>
+                <p><strong>Pinterest</strong><br><a href="https://pinterest.com/botanick_be">@botanick_be</a></p>
+                <p><strong data-i18n="contact.basedLabel"></strong><br><span data-i18n="contact.based"></span></p>
             </div>
         </div>
         <div class="contact-form">
-            <div class="form-group">
-                <label data-i18n="form.name"></label>
-                <input type="text" data-i18n="[placeholder]form.namePh" />
-            </div>
-            <div class="form-group">
-                <label data-i18n="form.email"></label>
-                <input type="email" data-i18n="[placeholder]form.emailPh" />
-            </div>
+            <div class="form-group"><label data-i18n="form.name"></label><input type="text"
+                    data-i18n="[placeholder]form.namePh" /></div>
+            <div class="form-group"><label data-i18n="form.email"></label><input type="email"
+                    data-i18n="[placeholder]form.emailPh" /></div>
             <div class="form-group">
                 <label data-i18n="form.occasion"></label>
-                <select id="occasion-select">
+                <select>
                     <option value="" data-i18n="form.occasionPh"></option>
                     <option data-i18n="occasions.weddings"></option>
                     <option data-i18n="occasions.seasonal"></option>
@@ -268,15 +386,12 @@
                     <option data-i18n="form.other"></option>
                 </select>
             </div>
-            <div class="form-group">
-                <label data-i18n="form.message"></label>
-                <textarea data-i18n="[placeholder]form.messagePh"></textarea>
-            </div>
+            <div class="form-group"><label data-i18n="form.message"></label><textarea
+                    data-i18n="[placeholder]form.messagePh"></textarea></div>
             <button class="btn-submit" onclick="handleFormSubmit(event)" data-i18n="form.submit"></button>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <span class="footer-logo">Botanick</span>
         <ul class="footer-links">
@@ -286,16 +401,14 @@
             <li><a href="#instagram" data-i18n="nav.instagram"></a></li>
             <li><a href="#contact" data-i18n="nav.contact2"></a></li>
         </ul>
-        <span style="opacity:0.45" data-i18n="footer.copy"></span>
+        <span style="opacity:.45" data-i18n="footer.copy"></span>
     </footer>
 
-    <!-- i18next + language detector from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/23.11.5/i18next.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/2.5.2/i18nextHttpBackend.min.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/8.0.0/i18nextBrowserLanguageDetector.min.js"></script>
     <script src="scripts/script.js"></script>
-
 </body>
 
 </html>
